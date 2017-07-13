@@ -1,0 +1,19 @@
+{
+    "name": "enrico69/gmg",
+    "description": "Give Me a Game : a personal test application based on the Silex micro framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric COURTIAL",
+            "email": "e.courtial30@gmail.com"
+        }
+    ],
+    "require": {
+        "silex/silex": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Games\\": "src/Games"
+        }
+    }
+}
