@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
-class Index {
-
+class Index
+{
     public function execute()
     {
         return 'Liste';

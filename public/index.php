@@ -13,7 +13,7 @@ $app = new Silex\Application();
 
 // Set routes
 foreach (Routes::$routes as $route => $routeData) {
-    $app->get($route, function() use($routeData) {
+    $app->get($route, function () use ($routeData) {
         $class = 'Games\Controller\\' . $routeData['Dir'] . '\\' . $routeData['File'];
         $controller = new $class();
 

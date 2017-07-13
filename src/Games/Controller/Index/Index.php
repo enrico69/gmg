@@ -11,9 +11,8 @@ namespace Games\Controller\Index;
 use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 
-
-class Index {
-
+class Index
+{
     public function execute()
     {
         return 'Enrico';
