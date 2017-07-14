@@ -1,11 +1,8 @@
 <?php
 /**
- * Main routes file
+ * Routes configuration file
  *
- * Created by PhpStorm.
- * User: Eric COURTIAL
- * Date: 13/07/2017
- * Time: 20:28
+ * @author Eric COURTIAL <e.courtial30@gmail.com>
  */
 namespace Games\Config;
 

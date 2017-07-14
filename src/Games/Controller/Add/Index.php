@@ -1,21 +1,31 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Eric
- * Date: 25/06/2017
- * Time: 15:36
+ * Controller to add a new game in the list
+ *
+ * @author Eric COURTIAL <e.courtial30@gmail.com>
  */
 
 namespace Games\Controller\Add;
 
-use Symfony\Component\HttpFoundation\Request;
-use Silex\Application;
-use Silex\Api\ControllerProviderInterface;
+use Games\Controller\ControllerAbstract;
 
-class Index
+/**
+ * Class Index
+ *
+ * @package Games\Controller\Add
+ */
+class Index extends ControllerAbstract
 {
+    /**
+     * Main method
+     *
+     * @return array
+     */
     public function execute()
     {
-        return 'Add';
+        return [
+            'title' => 'Ajouter un jeu',
+            'content' => $this->render("Games/Add.php", "Ajouter un jeu")
+        ];
     }
 }

@@ -1,21 +1,31 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Eric
- * Date: 25/06/2017
- * Time: 15:36
+ * Controller to select a game randomly
+ *
+ * @author Eric COURTIAL <e.courtial30@gmail.com>
  */
 
 namespace Games\Controller\Random;
 
-use Symfony\Component\HttpFoundation\Request;
-use Silex\Application;
-use Silex\Api\ControllerProviderInterface;
+use Games\Controller\ControllerAbstract;
 
-class Index
+/**
+ * Class Index
+ *
+ * @package Games\Controller\Random
+ */
+class Index extends ControllerAbstract
 {
+    /**
+     * Main method
+     *
+     * @return array
+     */
     public function execute()
     {
-        return 'Random';
+        return [
+            'title' => 'Un jeu au hasard',
+            'content' => $this->render("Games/Random.php", "Un jeu au hasard")
+        ];
     }
 }

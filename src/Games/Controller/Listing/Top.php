@@ -1,21 +1,30 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Eric
- * Date: 25/06/2017
- * Time: 15:36
+ * Controller to list top games
+ *
+ * @author Eric COURTIAL <e.courtial30@gmail.com>
  */
-
 namespace Games\Controller\Listing;
 
-use Symfony\Component\HttpFoundation\Request;
-use Silex\Application;
-use Silex\Api\ControllerProviderInterface;
+use Games\Controller\ControllerAbstract;
 
-class Top
+/**
+ * Class Top
+ *
+ * @package Games\Controller\Listing
+ */
+class Top extends ControllerAbstract
 {
+    /**
+     * Main method
+     *
+     * @return array
+     */
     public function execute()
     {
-        return 'Liste Top';
+        return [
+            'title' => 'Top jeux',
+            'content' => $this->render("Games/List.php", "Mes top jeux")
+        ];
     }
 }
