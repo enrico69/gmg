@@ -4,7 +4,7 @@
  *
  * @author Eric COURTIAL <e.courtial30@gmail.com>
  */
-namespace Games\Model;
+namespace Games\Model\Repository;
 
 use Doctrine\DBAL\Connection;
 

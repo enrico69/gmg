@@ -23,9 +23,13 @@ class Index extends ControllerAbstract
      */
     public function execute()
     {
+        $gamesRepo = $this->getRepository('Game');
+        /** @var \Games\Model\Game $gamesRepo */
+        $randomGame = $gamesRepo->getRandomGame();
+
         return [
             'title' => 'Un jeu au hasard',
-            'content' => $this->render("Games/Random.php", "Un jeu au hasard")
+            'content' => $this->render("Games/Detail.php", $randomGame)
         ];
     }
 }

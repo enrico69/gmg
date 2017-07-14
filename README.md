@@ -5,4 +5,4 @@ Under development
 
 ## Configuration
 * In the class _src/Config/General_: change the website URL.
-* In the class _src/Config/General_ : set you database credentials
+* In the class _src/Config/General_ : set your database credentials

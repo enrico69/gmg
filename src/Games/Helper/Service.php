@@ -47,7 +47,7 @@ class Service
     public static function getRepository($repoName)
     {
         if (!array_key_exists($repoName, self::$loadedRepos)) {
-            $className = "Games\\Model\\" . $repoName;
+            $className = "Games\\Model\\Repository\\" . $repoName;
             self::$loadedRepos[$repoName] = new $className(
                 self::getDoctrine()
             );

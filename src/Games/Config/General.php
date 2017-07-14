@@ -21,22 +21,22 @@ class General
     /**
      * Database name
      */
-    const DB_NAME = '';
+    const DB_NAME = 'games';
 
     /**
      * Database login
      */
-    const DB_LOGIN = '';
+    const DB_LOGIN = 'root';
 
     /**
      * Database password
      */
-    const DB_PASSWORD = '';
+    const DB_PASSWORD = 'azerty';
 
     /**
      * Database host
      */
-    const DB_HOST = '';
+    const DB_HOST = '172.17.0.2';
 
     /**
      * Database port

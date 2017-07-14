@@ -33,7 +33,7 @@ abstract class ControllerAbstract
     /**
      * Return Doctrine Connection
      *
-     * @return Doctrine\DBAL\Connection
+     * @return \Doctrine\DBAL\Connection
      */
     protected function getDoctrine()
     {
