@@ -41,7 +41,7 @@ class Game extends AbstractRepository
         $result = null;
 
         if ($gameCount > 0) {
-            $random = random_int(1, --$gameCount);
+            $random = random_int(1, $gameCount);
             $sql = "SELECT * FROM games WHERE id = $random";
 
             $query = $this->doctrine->prepare($sql);

@@ -27,9 +27,21 @@ class Index extends ControllerAbstract
         /** @var \Games\Model\Game $gamesRepo */
         $randomGame = $gamesRepo->getRandomGame();
 
-        return [
-            'title' => 'Un jeu au hasard',
-            'content' => $this->render("Games/Detail.php", $randomGame)
-        ];
+        if ($randomGame !==null) {
+            $response = [
+                'title' => 'Un jeu au hasard',
+                'content' => $this->render("Games/Detail.php", $randomGame)
+            ];
+        } else {
+            $response = [
+                'title' => 'Un jeu au hasard',
+                'content' => $this->render(
+                    "General/Message.php",
+                    'Il n\' y a aucun jeu enregistré en base.'
+                )
+            ];
+        }
+
+        return $response;
     }
 }
