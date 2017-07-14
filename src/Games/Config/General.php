@@ -13,11 +13,33 @@ namespace Games\Config;
  */
 class General
 {
+    /**
+     * Homepage URL
+     */
     const SITE_URL = "http://games.dev/";
 
-    const DB_NAME = 'games';
+    /**
+     * Database name
+     */
+    const DB_NAME = '';
 
+    /**
+     * Database login
+     */
     const DB_LOGIN = '';
 
+    /**
+     * Database password
+     */
     const DB_PASSWORD = '';
+
+    /**
+     * Database host
+     */
+    const DB_HOST = '';
+
+    /**
+     * Database port
+     */
+    const DB_PORT = 3306;
 }

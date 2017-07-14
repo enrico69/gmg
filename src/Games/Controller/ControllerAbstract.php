@@ -7,8 +7,8 @@
 namespace Games\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Silex\Application;
 use Games\Helper\View;
+use Games\Helper\Service;
 
 /**
  * Class ControllerAbstract
@@ -17,23 +17,6 @@ use Games\Helper\View;
  */
 abstract class ControllerAbstract
 {
-    /**
-     * Application instance
-     *
-     * @var \Silex\Application
-     */
-    private $application;
-
-    /**
-     * ControllerAbstract constructor.
-     *
-     * @param \Silex\Application $app is the application object
-     */
-    public function __construct($app)
-    {
-        $this->application = $app;
-    }
-
     /**
      * Method to render a template
      *
@@ -54,7 +37,19 @@ abstract class ControllerAbstract
      */
     protected function getDoctrine()
     {
-        return $this->application['db'];
+        return Service::getDoctrine();
+    }
+
+    /**
+     * Return the repository object
+     *
+     * @param string $repoName is the repository name
+     *
+     * @return object is the repository
+     */
+    protected function getRepository($repoName)
+    {
+        return Service::getRepository($repoName);
     }
 
     /**
