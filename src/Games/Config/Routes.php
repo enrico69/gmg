@@ -18,6 +18,7 @@ class Routes
         '/list' => ['Dir' => 'Listing', 'File' => 'Index'],
         '/list/top' => ['Dir' => 'Listing', 'File' => 'Top'],
         '/random' => ['Dir' => 'Random', 'File' => 'Index'],
-        '/add' => ['Dir' => 'Add', 'File' => 'Index']
+        '/add' => ['Dir' => 'Add', 'File' => 'Index'],
+        '/detail' => ['Dir' => 'Detail', 'File' => 'Index']
     ];
 }

@@ -42,12 +42,7 @@ class Game extends AbstractRepository
 
         if ($gameCount > 0) {
             $random = random_int(1, $gameCount);
-            $sql = "SELECT * FROM games WHERE id = $random";
-
-            $query = $this->doctrine->prepare($sql);
-            $query->execute();
-            $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
-            $result = $query->fetch();
+            $result = $this->getById($random);
         }
 
         return $result;
@@ -95,6 +90,68 @@ class Game extends AbstractRepository
             $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
             $result = $query->fetch();
         }
+
+        return $result;
+    }
+
+    /**
+     * Return a random game to play in solo
+     *
+     * @param int $id is the game id
+     *
+     * @return \Games\Model\Game|null
+     */
+    public function getById($id)
+    {
+        $sql = "SELECT * FROM games WHERE id = ?";
+
+        $query = $this->doctrine->prepare($sql);
+        $query->bindValue(1, $id);
+        $query->execute();
+        $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
+        $result = $query->fetch();
+
+        return $result;
+    }
+
+    /**
+     * Return the list of platform
+     *
+     * @return array
+     */
+    public function getPlatformList()
+    {
+        $gameCount = $this->countGames();
+        $result = [];
+
+        if ($gameCount > 0) {
+            $sql = "SELECT DISTINCT platform FROM games ORDER BY platform";
+
+            $query = $this->doctrine->prepare($sql);
+            $query->execute();
+            $query->setFetchMode(\PDO::FETCH_ASSOC);
+            $result = $query->fetchAll();
+        }
+
+        return $result;
+    }
+
+    /**
+     * Return a random game to play in solo
+     *
+     * @param string $support is the support the game is played on
+     *
+     * @return array|null
+     */
+    public function getGamesBySupport($support)
+    {
+        $sql = "SELECT * FROM games WHERE platform = ? ORDER BY name";
+
+        $query = $this->doctrine->prepare($sql);
+        $query->bindValue(1, $support);
+        $query->execute();
+        $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
+        $result = $query->fetchAll();
 
         return $result;
     }

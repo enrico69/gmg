@@ -53,6 +53,19 @@ abstract class ControllerAbstract
     }
 
     /**
+     * Perform a 302 redirection
+     *
+     * @param string $url is the url of destination
+     *
+     * @return null;
+     */
+    protected function redirect($url)
+    {
+        header('Location: '.$url);
+        exit;
+    }
+
+    /**
      * Main method
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request object

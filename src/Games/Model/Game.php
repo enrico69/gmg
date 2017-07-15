@@ -26,7 +26,7 @@ class Game
     /**
      * @var string
      */
-    protected $support;
+    protected $platform;
 
     /**
      * @var boolean
@@ -88,22 +88,6 @@ class Game
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSupport()
-    {
-        return $this->support;
-    }
-
-    /**
-     * @param string $support
-     */
-    public function setSupport($support)
-    {
-        $this->support = $support;
     }
 
     /**
@@ -200,5 +184,21 @@ class Game
     public function setTopGame($top_game)
     {
         $this->top_game = $top_game;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlatform()
+    {
+        return $this->platform;
+    }
+
+    /**
+     * @param string $platform
+     */
+    public function setPlatform($platform)
+    {
+        $this->platform = $platform;
     }
 }

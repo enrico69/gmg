@@ -8,6 +8,7 @@
 namespace Games\Controller\Random;
 
 use Games\Controller\ControllerAbstract;
+use Games\Config\General;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -29,21 +30,16 @@ class Index extends ControllerAbstract
         $randomGame = $this->getGame($request);
 
         if ($randomGame !==null) {
-            $response = [
-                'title' => 'Un jeu au hasard',
-                'content' => $this->render("Games/Detail.php", $randomGame)
-            ];
-        } else {
-            $response = [
-                'title' => 'Un jeu au hasard',
-                'content' => $this->render(
-                    "General/Message.php",
-                    'Il n\' y a aucun jeu enregistré en base.'
-                )
-            ];
+            $this->redirect(General::SITE_URL . 'detail?id=' . $randomGame->getId());
         }
 
-        return $response;
+        return [
+            'title' => 'Un jeu au hasard',
+            'content' => $this->render(
+                "General/Message.php",
+                'Il n\' y a aucun jeu enregistré en base.'
+            )
+        ];
     }
 
     /**
@@ -58,7 +54,7 @@ class Index extends ControllerAbstract
         $filter = $request->get('mode', '');
 
         $gamesRepo = $this->getRepository('Game');
-        /** @var \Games\Model\Game $gamesRepo */
+        /** @var \Games\Model\Repository\Game $gamesRepo */
 
         switch ($filter) {
             case "": $randomGame = $gamesRepo->getRandomGame(); break;

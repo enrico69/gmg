@@ -41,6 +41,8 @@ class View
      */
     public static function render($templateName, $content)
     {
+        $siteURL = General::SITE_URL;
+
         ob_start();
         include self::getTemplatePath($templateName);
 

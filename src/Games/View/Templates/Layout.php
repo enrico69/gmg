@@ -43,6 +43,7 @@
                             <li><a href="<?php echo $siteURL; ?>random?mode=multi" >Un jeu à jouer en multi au hasard</a></li>
                         </ul>
                     </li>
+                    <li><a class="nav-li" href="<?php echo $siteURL; ?>list" >Listes</a></li>
                     <li><a class="nav-li" href="<?php echo $siteURL; ?>list/top" >Top jeux</a></li>
                     <li><a class="nav-li" href="<?php echo $siteURL; ?>add" >Ajout</a></li>
                 </ul>

@@ -9,7 +9,7 @@ $game = $content;
 ?>
 <div class="container">
     <h1 class="title text-center"><?php echo htmlentities($game->getName()); ?></h1>
-    <p><strong>Support:</strong> <?php echo htmlentities($game->getSupport()); ?></p>
+    <p><strong>Support:</strong> <?php echo htmlentities($game->getPlatform()); ?></p>
     <p><strong>A jouer en solo:</strong>
         <?php echo $game->isToPlaySolo() ? 'Oui' : 'Non'; ?></p>
     <p><strong>A jouer en multi:</strong>
