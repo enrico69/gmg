@@ -7,6 +7,7 @@
 namespace Games\Controller\Listing;
 
 use Games\Controller\ControllerAbstract;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class Top
@@ -18,9 +19,11 @@ class Top extends ControllerAbstract
     /**
      * Main method
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP Request object
+     *
      * @return array
      */
-    public function execute()
+    public function execute(Request $request)
     {
         return [
             'title' => 'Top jeux',

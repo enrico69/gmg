@@ -55,7 +55,9 @@ abstract class ControllerAbstract
     /**
      * Main method
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request object
+     *
      * @return mixed
      */
-    abstract public function execute();
+    abstract public function execute(Request $request);
 }

@@ -12,6 +12,7 @@ use Games\Config\General;
 use Games\Helper\View;
 use Games\Helper\Service;
 use Silex\Provider\DoctrineServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 // Create application
 $app = new Silex\Application();
@@ -35,11 +36,11 @@ Service::$app = $app;
 // Set routes
 foreach (Routes::$routes as $route => $routeData) {
     $app->get(
-        $route, function () use ($routeData) {
+        $route, function (Request $request) use ($routeData) {
             $class = 'Games\Controller\\' . $routeData['Dir'] .
                 '\\' . $routeData['File'];
             $controller = new $class();
-            $render = $controller->execute();
+            $render = $controller->execute($request);
 
             return View::renderPage($render['title'], $render['content']);
         }

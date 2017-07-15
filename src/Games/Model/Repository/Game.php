@@ -52,4 +52,50 @@ class Game extends AbstractRepository
 
         return $result;
     }
+
+    /**
+     * Return a random game to play in solo
+     *
+     * @return \Games\Model\Game|null
+     */
+    public function getRandomGameSolo()
+    {
+        $gameCount = $this->countGames();
+        $result = null;
+
+        if ($gameCount > 0) {
+            $sql = "SELECT * FROM games WHERE to_play_solo = 1" .
+                " ORDER BY RAND() LIMIT 1";
+
+            $query = $this->doctrine->prepare($sql);
+            $query->execute();
+            $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
+            $result = $query->fetch();
+        }
+
+        return $result;
+    }
+
+    /**
+     * Return a random game to play in solo
+     *
+     * @return \Games\Model\Game|null
+     */
+    public function getRandomGameMulti()
+    {
+        $gameCount = $this->countGames();
+        $result = null;
+
+        if ($gameCount > 0) {
+            $sql = "SELECT * FROM games WHERE to_play_multi = 1" .
+                " ORDER BY RAND() LIMIT 1";
+
+            $query = $this->doctrine->prepare($sql);
+            $query->execute();
+            $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
+            $result = $query->fetch();
+        }
+
+        return $result;
+    }
 }

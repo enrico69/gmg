@@ -49,6 +49,11 @@ class Game
     protected $many;
 
     /**
+     * @var boolean
+     */
+    protected $top_game;
+
+    /**
      * @var string
      */
     protected $comments;
@@ -179,5 +184,21 @@ class Game
     public function setComments($comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTopGame()
+    {
+        return $this->top_game;
+    }
+
+    /**
+     * @param bool $top_game
+     */
+    public function setTopGame($top_game)
+    {
+        $this->top_game = $top_game;
     }
 }
