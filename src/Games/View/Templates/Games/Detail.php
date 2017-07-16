@@ -26,7 +26,7 @@ $extra = array_key_exists('extra', $content) ? $content['extra'] : '';
     <p><strong>Top jeu:</strong>
         <?php echo $game->isTopGame() ? 'Oui' : 'Non'; ?></p>
     <p><strong>Commentaires:</strong></p>
-    <p><?php echo htmlentities(nl2br($game->getComments())); ?></p>
+    <p><?php echo nl2br(htmlentities($game->getComments())); ?></p>
     <?php if ($extra != "") {
             ?>
         <p><a href="<?php echo $extra; ?>">Un autre au hasard</a></p>

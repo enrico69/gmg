@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller to list top games
+ * Controller to search for games
  *
  * @author Eric COURTIAL <e.courtial30@gmail.com>
  */
@@ -10,11 +10,11 @@ use Games\Controller\ControllerAbstract;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class Top
+ * Class Search
  *
  * @package Games\Controller\Listing
  */
-class Top extends ControllerAbstract
+class Search extends ControllerAbstract
 {
     /**
      * Main method
@@ -25,13 +25,19 @@ class Top extends ControllerAbstract
      */
     public function execute(Request $request)
     {
-        $gamesRepo = $this->getRepository('Game');
-        /** @var \Games\Model\Repository\Game $gamesRepo */
-        $content['games'] = $gamesRepo->getTopGames();
-        $content['title'] = "Top jeux";
+        $query = $request->get('search', '');
+        if (mb_strlen(trim($query)) == 0) {
+            $content['games'] = [];
+        } else {
+            $gamesRepo = $this->getRepository('Game');
+            /** @var \Games\Model\Repository\Game $gamesRepo */
+            $content['games'] = $gamesRepo->searchGames($query);
+        }
+
+        $content['title'] = "Recherche avec le mot clef " . htmlentities($query);
 
         return [
-            'title' => 'Top jeux',
+            'title' => $content['title'],
             'content' => $this->render("Games/List.php", $content)
         ];
     }

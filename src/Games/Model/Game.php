@@ -8,6 +8,7 @@
 namespace Games\Model;
 
 use Games\Model\AbstractEntity;
+use Games\Helper\Validator;
 
 /**
  * Class Game
@@ -227,23 +228,23 @@ class Game extends AbstractEntity
             $messages[] = "Support manquant";
         }
 
-        if (!filter_var($this->to_play_solo, FILTER_VALIDATE_BOOLEAN)) {
+        if (!Validator::isOneOrZero($this->isToPlaySolo())) {
             $messages[] = "Jouer en solo: mauvais format";
         }
 
-        if (!filter_var($this->to_play_multi, FILTER_VALIDATE_BOOLEAN)) {
-            $messages[] = "Jouer en solo: mauvais format";
+        if (!Validator::isOneOrZero($this->isToPlayMulti())) {
+            $messages[] = "Jouer en multi: mauvais format";
         }
 
-        if (!filter_var($this->copy, FILTER_VALIDATE_BOOLEAN)) {
+        if (!Validator::isOneOrZero($this->isCopy())) {
             $messages[] = "Au moins une copie: mauvais format";
         }
 
-        if (!filter_var($this->many, FILTER_VALIDATE_BOOLEAN)) {
-            $messages[] = "Plusieurs exemplaores: mauvais format";
+        if (!Validator::isOneOrZero($this->isMany())) {
+            $messages[] = "Plusieurs exemplaires: mauvais format";
         }
 
-        if (!filter_var($this->top_game, FILTER_VALIDATE_BOOLEAN)) {
+        if (!Validator::isOneOrZero($this->isTopGame())) {
             $messages[] = "Top jeu: mauvais format";
         }
 

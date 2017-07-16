@@ -109,7 +109,9 @@ class Index extends ControllerAbstract
      */
     protected function getContentGameList($title, array $gamesList)
     {
-        $title .= ' (' . count($gamesList) . ' jeux)';
+        $count = count($gamesList);
+        $plural = ($count == 1) ? 'jeu' : 'jeux';
+        $title .= ' (' . $count . ' ' . $plural . ')';
 
         return $this->render(
             "Games/List.php",

@@ -49,6 +49,11 @@
                 </ul>
             </div>
         </div>
+        <form style="float:right;" method="POST" action="<?php echo $siteURL;?>search">
+            <input type="text" name="search" />
+            <input type="submit" value="Rechercher"/>
+        </form>
+        </div>
     </nav>
     <?php echo $content; ?>
 </body>

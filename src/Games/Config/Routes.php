@@ -20,6 +20,7 @@ class Routes
         '/random' => ['Methods' => ['GET'], 'Dir' => 'Random', 'File' => 'Index'],
         '/add' => ['Methods' => ['GET', 'POST'], 'Dir' => 'Add', 'File' => 'Index'],
         '/detail' => ['Methods' => ['GET'], 'Dir' => 'Detail', 'File' => 'Index'],
-        '/edit' => ['Methods' => ['GET', 'POST'], 'Dir' => 'Edit', 'File' => 'Index']
+        '/edit' => ['Methods' => ['GET', 'POST'], 'Dir' => 'Edit', 'File' => 'Index'],
+        '/search' => ['Methods' => ['POST'], 'Dir' => 'Listing', 'File' => 'Search']
     ];
 }

@@ -131,6 +131,20 @@ class Game extends AbstractRepository
             $query->execute();
             $query->setFetchMode(\PDO::FETCH_ASSOC);
             $result = $query->fetchAll();
+
+            // Add extra categ "To buy"
+            $toBuyCateg = false;
+            $extraCategName = "A acheter";
+            foreach ($result as $entry) {
+                if ($entry['platform'] == $extraCategName) {
+                    $toBuyCateg = true;
+                    break;
+                }
+            }
+
+            if (!$toBuyCateg) {
+                array_unshift($result, ['platform' => $extraCategName]);
+            }
         }
 
         return $result;
@@ -216,5 +230,45 @@ class Game extends AbstractRepository
         $game->setId($this->doctrine->lastInsertId());
 
         return $game;
+    }
+
+    /**
+     * Return a a list of top games
+     *
+     * @return array|null
+     */
+    public function getTopGames()
+    {
+        $sql = "SELECT * FROM games WHERE top_game = 1 ORDER BY name";
+
+        $query = $this->doctrine->prepare($sql);
+        $query->execute();
+        $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
+        $result = $query->fetchAll();
+
+        return $result;
+    }
+    /**
+     * Search a list of games
+     *
+     * @param string $occurence The occurence to look for
+     *
+     * @return array|null
+     */
+    public function searchGames($occurence)
+    {
+        $sql = "SELECT * FROM games WHERE " .
+            "name LIKE ? " .
+            "OR comments LIKE ? " .
+            "ORDER BY name";
+
+        $query = $this->doctrine->prepare($sql);
+        $query->bindValue(1, '%' . $occurence . '%');
+        $query->bindValue(2, '%' . $occurence .'%');
+        $query->execute();
+        $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
+        $result = $query->fetchAll();
+
+        return $result;
     }
 }

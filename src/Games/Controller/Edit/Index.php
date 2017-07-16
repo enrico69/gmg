@@ -112,10 +112,10 @@ class Index extends ControllerAbstract
 
         $messages = $game->validate();
         $sentence = "";
-        if (count($messages) == 0) {
+        if (count($messages) != 0) {
             $sentence = "Problème durant la validation:<ul>";
             foreach ($messages as $message) {
-                $sentence .= "<li>$messages</li>";
+                $sentence .= "<li>$message</li>";
             }
             $sentence .= "</ul><p>Merci de faire 'Précédent'</p>";
         }
