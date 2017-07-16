@@ -27,10 +27,12 @@ class Index extends ControllerAbstract
      */
     public function execute(Request $request)
     {
-        $randomGame = $this->getGame($request);
+        $content = $this->getGame($request);
 
-        if ($randomGame !==null) {
-            $this->redirect(General::SITE_URL . 'detail?id=' . $randomGame->getId());
+        if ($content['game'] !==null) {
+            $urlToRedirect = General::SITE_URL . 'detail?id=' . $content['game']->getId();
+            $urlToRedirect .= $content['filter'];
+            $this->redirect($urlToRedirect);
         }
 
         return [
@@ -47,7 +49,7 @@ class Index extends ControllerAbstract
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP Request object
      *
-     * @return \Games\Model\Game;
+     * @return array
      */
     protected function getGame(Request $request)
     {
@@ -57,12 +59,12 @@ class Index extends ControllerAbstract
         /** @var \Games\Model\Repository\Game $gamesRepo */
 
         switch ($filter) {
-            case "": $randomGame = $gamesRepo->getRandomGame(); break;
-            case "solo": $randomGame = $gamesRepo->getRandomGameSolo(); break;
-            case "multi": $randomGame = $gamesRepo->getRandomGameMulti(); break;
-            default: $randomGame = $gamesRepo->getRandomGame(); break;
+            case "": $randomGame = $gamesRepo->getRandomGame(); $filter = "&mode=random"; break;
+            case "solo": $randomGame = $gamesRepo->getRandomGameSolo(); $filter = '&mode=solo'; break;
+            case "multi": $randomGame = $gamesRepo->getRandomGameMulti(); $filter = '&mode=multi'; break;
+            default: $randomGame = $gamesRepo->getRandomGame(); $filter = "&mode=random"; break;
         }
 
-        return $randomGame;
+        return ['game' => $randomGame, 'filter' => $filter];
     }
 }

@@ -8,6 +8,7 @@
 namespace Games\Controller\Detail;
 
 use Games\Controller\ControllerAbstract;
+use Games\Config\General;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -27,17 +28,22 @@ class Index extends ControllerAbstract
     public function execute(Request $request)
     {
         $id = $request->get('id', 0);
+        $mode = $request->get('mode', '');
 
         $gamesRepo = $this->getRepository('Game');
         /** @var \Games\Model\Repository\Game $gamesRepo */
 
         $theGame = $gamesRepo->getById($id);
         if ($theGame) {
+            $urlToRedirect = "";
+            if ($mode != "") {
+                $urlToRedirect = General::SITE_URL . 'random?mode=' . $mode;
+            }
             $response = [
                 'title' => $theGame->getName(),
                 'content' => $this->render(
                     "Games/Detail.php",
-                    $theGame
+                    ['game' => $theGame, 'extra' => $urlToRedirect]
                 )
             ];
         } else {
