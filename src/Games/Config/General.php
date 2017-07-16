@@ -42,4 +42,9 @@ class General
      * Database port
      */
     const DB_PORT = 3306;
+
+    /**
+     * Password (not empty)
+     */
+    const PASSWORD = 'to_replace';
 }

@@ -12,7 +12,7 @@ $games = $content['games'];
     <?php
     foreach ($games as $game) {
         /** @var \Games\Model\Game $game */
-        echo '<p>' . htmlentities(utf8_encode($game->getName())) .
+        echo '<p>' . htmlentities($game->getName()) .
             ' -  <a href="' . $siteURL . 'detail?id=' .
             $game->getId() . '">Detail</a></p>';
     }

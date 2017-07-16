@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\Request;
 $app = new Silex\Application();
 
 // Declare services
+
+// --> Doctrine
 $app->register(
     new DoctrineServiceProvider(), [
         'db.options' => [
@@ -31,20 +33,41 @@ $app->register(
     ]
 );
 
+// --> Monolog
+$app->register(
+    new Silex\Provider\MonologServiceProvider(), [
+    'monolog.logfile' => __DIR__.'/production.log',
+    ]
+);
+
+// Setting application for service access
 Service::$app = $app;
 
 // Set routes
 foreach (Routes::$routes as $route => $routeData) {
-    $app->get(
-        $route, function (Request $request) use ($routeData) {
-            $class = 'Games\Controller\\' . $routeData['Dir'] .
-                '\\' . $routeData['File'];
-            $controller = new $class();
+    $handler = function (Request $request) use ($routeData) {
+        $class = 'Games\Controller\\' . $routeData['Dir'] .
+            '\\' . $routeData['File'];
+        $controller = new $class();
+        try {
             $render = $controller->execute($request);
-
-            return View::renderPage($render['title'], $render['content']);
+            $response = View::renderPage($render['title'], $render['content']);
+        } catch (\Exception $ex) {
+            Service::getLog()->error($ex->getMessage());
+            echo $ex->getMessage();
+            $response = View::renderPage("Erreur", "Une erreur s'est produite");
         }
-    );
+
+        return $response;
+    };
+
+    if (in_array('GET', $routeData['Methods'])) {
+        $app->get($route, $handler);
+    }
+
+    if (in_array('POST', $routeData['Methods'])) {
+        $app->post($route, $handler);
+    }
 }
 
 // Start application

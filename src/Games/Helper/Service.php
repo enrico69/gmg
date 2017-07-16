@@ -38,6 +38,16 @@ class Service
     }
 
     /**
+     * Get Monolog
+     *
+     * @return \Monolog\Logger
+     */
+    public static function getLog()
+    {
+        return self::$app['monolog'];
+    }
+
+    /**
      * Return the asked repository
      *
      * @param string $repoName is the repository name

@@ -14,11 +14,12 @@ namespace Games\Config;
 class Routes
 {
     public static $routes = [
-        '/' => ['Dir' => 'Index', 'File' => 'Index'],
-        '/list' => ['Dir' => 'Listing', 'File' => 'Index'],
-        '/list/top' => ['Dir' => 'Listing', 'File' => 'Top'],
-        '/random' => ['Dir' => 'Random', 'File' => 'Index'],
-        '/add' => ['Dir' => 'Add', 'File' => 'Index'],
-        '/detail' => ['Dir' => 'Detail', 'File' => 'Index']
+        '/' => ['Methods' => ['GET'], 'Dir' => 'Index', 'File' => 'Index'],
+        '/list' => ['Methods' => ['GET'], 'Dir' => 'Listing', 'File' => 'Index'],
+        '/list/top' => ['Methods' => ['GET'], 'Dir' => 'Listing', 'File' => 'Top'],
+        '/random' => ['Methods' => ['GET'], 'Dir' => 'Random', 'File' => 'Index'],
+        '/add' => ['Methods' => ['GET'], 'Dir' => 'Add', 'File' => 'Index'],
+        '/detail' => ['Methods' => ['GET'], 'Dir' => 'Detail', 'File' => 'Index'],
+        '/edit' => ['Methods' => ['GET', 'POST'], 'Dir' => 'Edit', 'File' => 'Index']
     ];
 }

@@ -10,7 +10,8 @@
     ],
     "require": {
         "silex/silex": "~2.0",
-        "doctrine/dbal": ">=2.0"
+        "doctrine/dbal": ">=2.0",
+        "monolog/monolog": "^1.23"
     },
     "autoload": {
         "psr-4": {

@@ -155,4 +155,39 @@ class Game extends AbstractRepository
 
         return $result;
     }
+
+    /**
+     * Update a game
+     *
+     * @param \Games\Model\Game $game is the game
+     *
+     * @return void
+     */
+    public function updateGame($game)
+    {
+        $sql = "UPDATE games SET " .
+            "name = ?, " .
+            "platform = ?, " .
+            "to_play_solo = ?, " .
+            "to_play_multi = ?, " .
+            "copy = ?, " .
+            "many = ?, " .
+            "top_game = ?, " .
+            "comments = ? " .
+            "WHERE id = ?";
+
+        $query = $this->doctrine->prepare($sql);
+        $query->bindValue(1, $game->getName());
+        $query->bindValue(2, $game->getPlatform());
+        $query->bindValue(3, $game->isToPlaySolo());
+        $query->bindValue(4, $game->isToPlayMulti());
+        $query->bindValue(5, $game->isCopy());
+        $query->bindValue(6, $game->isMany());
+        $query->bindValue(7, $game->isTopGame());
+        $query->bindValue(8, $game->getComments());
+        $query->bindValue(9, $game->getId());
+        $query->execute();
+
+        return null;
+    }
 }

@@ -6,6 +6,7 @@
  */
 namespace Games\Controller;
 
+use Games\Config\General;
 use Symfony\Component\HttpFoundation\Request;
 use Games\Helper\View;
 use Games\Helper\Service;
@@ -41,6 +42,16 @@ abstract class ControllerAbstract
     }
 
     /**
+     * Return Monolog
+     *
+     * @return \Monolog\Logger
+     */
+    protected function getLog()
+    {
+        return Service::getLog();
+    }
+
+    /**
      * Return the repository object
      *
      * @param string $repoName is the repository name
@@ -63,6 +74,18 @@ abstract class ControllerAbstract
     {
         header('Location: '.$url);
         exit;
+    }
+
+    /**
+     * Check if the password is right
+     *
+     * @param string $password the entered password
+     *
+     * @return bool
+     */
+    protected function isPasswordValid($password)
+    {
+        return $password == General::PASSWORD ? true : false;
     }
 
     /**

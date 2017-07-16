@@ -10,8 +10,9 @@ $extra = array_key_exists('extra', $content) ? $content['extra'] : '';
 ?>
 <div class="container">
     <h1 class="title text-center"><?php echo htmlentities(
-            utf8_encode($game->getName())
+            $game->getName()
         ); ?></h1>
+    <p><a href="<?php echo $urlSite; ?>edit?id=<?php echo $game->getId(); ?>">Editer</a></p>
     <p><strong>Support:</strong> <?php
         echo htmlentities($game->getPlatform()); ?></p>
     <p><strong>A jouer en solo:</strong>
@@ -25,7 +26,7 @@ $extra = array_key_exists('extra', $content) ? $content['extra'] : '';
     <p><strong>Top jeu:</strong>
         <?php echo $game->isTopGame() ? 'Oui' : 'Non'; ?></p>
     <p><strong>Commentaires:</strong></p>
-    <p><?php echo htmlentities(utf8_encode($game->getComments())); ?></p>
+    <p><?php echo htmlentities(nl2br($game->getComments())); ?></p>
     <?php if ($extra != "") {
             ?>
         <p><a href="<?php echo $extra; ?>">Un autre au hasard</a></p>

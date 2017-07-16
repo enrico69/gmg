@@ -7,11 +7,13 @@
 
 namespace Games\Model;
 
+use Games\Model\AbstractEntity;
+
 /**
  * Class Game
  * @package Games\Model
  */
-class Game
+class Game extends AbstractEntity
 {
     /**
      * @var int
@@ -26,7 +28,7 @@ class Game
     /**
      * @var string
      */
-    protected $platform;
+    protected $platform = "";
 
     /**
      * @var boolean
@@ -200,5 +202,51 @@ class Game
     public function setPlatform($platform)
     {
         $this->platform = $platform;
+    }
+
+    /**
+     * Validate the object
+     *
+     * @param boolean $validateId validate the id field too
+     *
+     * @return mixed
+     */
+    public function validate($validateId = false)
+    {
+        $messages = [];
+
+        if ($validateId && !filter_var($this->id, FILTER_VALIDATE_INT)) {
+            $messages[] = "Id n'est pas un entier";
+        }
+
+        if (mb_strlen(trim($this->name)) == 0) {
+            $messages[] = "Nom manquant";
+        }
+
+        if (mb_strlen(trim($this->platform)) == 0) {
+            $messages[] = "Support manquant";
+        }
+
+        if (!filter_var($this->to_play_solo, FILTER_VALIDATE_BOOLEAN)) {
+            $messages[] = "Jouer en solo: mauvais format";
+        }
+
+        if (!filter_var($this->to_play_multi, FILTER_VALIDATE_BOOLEAN)) {
+            $messages[] = "Jouer en solo: mauvais format";
+        }
+
+        if (!filter_var($this->copy, FILTER_VALIDATE_BOOLEAN)) {
+            $messages[] = "Au moins une copie: mauvais format";
+        }
+
+        if (!filter_var($this->many, FILTER_VALIDATE_BOOLEAN)) {
+            $messages[] = "Plusieurs exemplaores: mauvais format";
+        }
+
+        if (!filter_var($this->top_game, FILTER_VALIDATE_BOOLEAN)) {
+            $messages[] = "Top jeu: mauvais format";
+        }
+
+        return $messages;
     }
 }
