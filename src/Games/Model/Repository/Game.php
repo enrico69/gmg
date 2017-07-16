@@ -190,4 +190,31 @@ class Game extends AbstractRepository
 
         return null;
     }
+
+    /**
+     * Add a new  game
+     *
+     * @param \Games\Model\Game $game is the game
+     *
+     * @return \Games\Model\Game
+     */
+    public function addGame($game)
+    {
+        $sql = "INSERT INTO games VALUE(" .
+            "0, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $query = $this->doctrine->prepare($sql);
+        $query->bindValue(1, $game->getName());
+        $query->bindValue(2, $game->getPlatform());
+        $query->bindValue(3, $game->isToPlaySolo());
+        $query->bindValue(4, $game->isToPlayMulti());
+        $query->bindValue(5, $game->isCopy());
+        $query->bindValue(6, $game->isMany());
+        $query->bindValue(7, $game->isTopGame());
+        $query->bindValue(8, $game->getComments());
+        $query->execute();
+        $game->setId($this->doctrine->lastInsertId());
+
+        return $game;
+    }
 }

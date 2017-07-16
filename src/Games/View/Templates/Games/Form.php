@@ -11,12 +11,13 @@ $yesNoArray = [
     0 => 'Non',
     1 => 'Oui'
 ];
+$url = $content['url'];;
 /** @var \Games\Model\Game $game */
 ?>
 <div class="container">
     <h1 class="title text-center"><?php echo $title; ?></h1>
 
-    <form method="POST" action="<?php echo $urlSite ;?>edit">
+    <form method="POST" action="<?php echo $urlSite . $url ;?>">
         <p><input type="hidden" name="id" value="<?php echo $game->getId();?>"/></p>
         <p><strong>Nom: </strong>
             <input type="text" title="name"

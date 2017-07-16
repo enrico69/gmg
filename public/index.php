@@ -36,7 +36,8 @@ $app->register(
 // --> Monolog
 $app->register(
     new Silex\Provider\MonologServiceProvider(), [
-    'monolog.logfile' => __DIR__.'/production.log',
+    'monolog.logfile' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
+        'app' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . 'production.log'
     ]
 );
 
@@ -54,7 +55,6 @@ foreach (Routes::$routes as $route => $routeData) {
             $response = View::renderPage($render['title'], $render['content']);
         } catch (\Exception $ex) {
             Service::getLog()->error($ex->getMessage());
-            echo $ex->getMessage();
             $response = View::renderPage("Erreur", "Une erreur s'est produite");
         }
 

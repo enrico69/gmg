@@ -93,7 +93,8 @@ class Index extends ControllerAbstract
         return [
             'game' => $theGame,
             'platforms' => $platforms,
-            'title' => $title
+            'title' => $title,
+            'url' => 'edit'
         ];
     }
 
