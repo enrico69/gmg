@@ -57,6 +57,20 @@ $url = $content['url'];;
                 ?>
             </select>
         </p>
+
+        <p><strong>A faire bientôt?: </strong>
+            <?php $selected = $game->isToDo() ? " selected" : ''; ?>
+            <select name="to_do" title="to_do">
+                <<?php
+                foreach ($yesNoArray as $value => $label) {
+                    $selected = ($value == $game->isToDo()) ? " selected" : '';
+                    echo '<option value="' . $value . '"' . $selected .
+                        '>' . $label . '</option>';
+                }
+                ?>
+            </select>
+        </p>
+
         <p><strong>Plusieurs exemplaires?: </strong>
             <?php $selected = $game->isMany() ? " selected" : ''; ?>
             <select name="many" title="many">
@@ -94,9 +108,7 @@ $url = $content['url'];;
             </select>
         </p>
         <p><strong>Commentaires: </strong><br/>
-            <textarea name="comments" title="comments">
-                <?php echo trim($game->getComments()); ?>
-            </textarea>
+            <textarea name="comments" title="comments"><?php echo trim($game->getComments()); ?></textarea>
         </p>
         <p><strong>Mot de passe: </strong>
             <input type="password" title="password" name="password"/>

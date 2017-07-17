@@ -187,7 +187,8 @@ class Game extends AbstractRepository
             "copy = ?, " .
             "many = ?, " .
             "top_game = ?, " .
-            "comments = ? " .
+            "comments = ?, " .
+            "to_do = ? " .
             "WHERE id = ?";
 
         $query = $this->doctrine->prepare($sql);
@@ -199,7 +200,8 @@ class Game extends AbstractRepository
         $query->bindValue(6, $game->isMany());
         $query->bindValue(7, $game->isTopGame());
         $query->bindValue(8, $game->getComments());
-        $query->bindValue(9, $game->getId());
+        $query->bindValue(9, $game->isToDo());
+        $query->bindValue(10, $game->getId());
         $query->execute();
 
         return null;
@@ -215,7 +217,7 @@ class Game extends AbstractRepository
     public function addGame($game)
     {
         $sql = "INSERT INTO games VALUE(" .
-            "0, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "0, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $query = $this->doctrine->prepare($sql);
         $query->bindValue(1, $game->getName());
@@ -226,6 +228,7 @@ class Game extends AbstractRepository
         $query->bindValue(6, $game->isMany());
         $query->bindValue(7, $game->isTopGame());
         $query->bindValue(8, $game->getComments());
+        $query->bindValue(9, $game->isToDo());
         $query->execute();
         $game->setId($this->doctrine->lastInsertId());
 
@@ -248,6 +251,24 @@ class Game extends AbstractRepository
 
         return $result;
     }
+
+    /**
+     * Return a a list of to be played in priority
+     *
+     * @return array|null
+     */
+    public function getGamesToBePlayedSoon()
+    {
+        $sql = "SELECT * FROM games WHERE to_do = 1 ORDER BY name";
+
+        $query = $this->doctrine->prepare($sql);
+        $query->execute();
+        $query->setFetchMode(\PDO::FETCH_CLASS, GameEntity::class);
+        $result = $query->fetchAll();
+
+        return $result;
+    }
+
     /**
      * Search a list of games
      *

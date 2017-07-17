@@ -46,6 +46,7 @@
                     <li><a class="nav-li" href="<?php echo $siteURL; ?>list" >Listes</a></li>
                     <li><a class="nav-li" href="<?php echo $siteURL; ?>list/top" >Top jeux solo récurrents</a></li>
                     <li><a class="nav-li" href="<?php echo $siteURL; ?>list?filter=A%20acheter" >A acheter</a></li>
+                    <li><a class="nav-li" href="<?php echo $siteURL; ?>todo" >Jeux à faire</a></li>
                     <li><a class="nav-li" href="<?php echo $siteURL; ?>add" >Ajout</a></li>
                 </ul>
             </div>

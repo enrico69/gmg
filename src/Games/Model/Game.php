@@ -62,6 +62,11 @@ class Game extends AbstractEntity
     protected $comments;
 
     /**
+     * @var boolean
+     */
+    protected $to_do;
+
+    /**
      * @return int
      */
     public function getId()
@@ -90,7 +95,7 @@ class Game extends AbstractEntity
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = trim($name);
     }
 
     /**
@@ -170,7 +175,8 @@ class Game extends AbstractEntity
      */
     public function setComments($comments)
     {
-        $this->comments = $comments;
+        $comments = preg_replace('/[x00-x1Fx80-xFF]/', '', $comments);
+        $this->comments = trim($comments);
     }
 
     /**
@@ -202,7 +208,23 @@ class Game extends AbstractEntity
      */
     public function setPlatform($platform)
     {
-        $this->platform = $platform;
+        $this->platform = trim($platform);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isToDo()
+    {
+        return $this->to_do;
+    }
+
+    /**
+     * @param bool $to_do
+     */
+    public function setToDo($to_do)
+    {
+        $this->to_do = $to_do;
     }
 
     /**
@@ -246,6 +268,10 @@ class Game extends AbstractEntity
 
         if (!Validator::isOneOrZero($this->isTopGame())) {
             $messages[] = "Top jeu: mauvais format";
+        }
+
+        if (!Validator::isOneOrZero($this->isToDo())) {
+            $messages[] = "A faire: mauvais format";
         }
 
         return $messages;

@@ -21,6 +21,7 @@ class Routes
         '/add' => ['Methods' => ['GET', 'POST'], 'Dir' => 'Add', 'File' => 'Index'],
         '/detail' => ['Methods' => ['GET'], 'Dir' => 'Detail', 'File' => 'Index'],
         '/edit' => ['Methods' => ['GET', 'POST'], 'Dir' => 'Edit', 'File' => 'Index'],
-        '/search' => ['Methods' => ['POST'], 'Dir' => 'Listing', 'File' => 'Search']
+        '/search' => ['Methods' => ['POST'], 'Dir' => 'Listing', 'File' => 'Search'],
+        '/todo' => ['Methods' => ['GET'], 'Dir' => 'Listing', 'File' => 'Todo']
     ];
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller to list top games
+ * Controller to list the games to be played soon
  *
  * @author Eric COURTIAL <e.courtial30@gmail.com>
  */
@@ -10,11 +10,11 @@ use Games\Controller\ControllerAbstract;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class Top
+ * Class Todo
  *
  * @package Games\Controller\Listing
  */
-class Top extends ControllerAbstract
+class Todo extends ControllerAbstract
 {
     /**
      * Main method
@@ -27,8 +27,8 @@ class Top extends ControllerAbstract
     {
         $gamesRepo = $this->getRepository('Game');
         /** @var \Games\Model\Repository\Game $gamesRepo */
-        $content['games'] = $gamesRepo->getTopGames();
-        $content['title'] = "Top jeux à jouer régulièrement en solo";
+        $content['games'] = $gamesRepo->getGamesToBePlayedSoon();
+        $content['title'] = "Jeu à faire en solo prochainement";
 
         return [
             'title' => 'Top jeux',
