@@ -28,7 +28,7 @@ class Top extends ControllerAbstract
         $gamesRepo = $this->getRepository('Game');
         /** @var \Games\Model\Repository\Game $gamesRepo */
         $content['games'] = $gamesRepo->getTopGames();
-        $content['title'] = "Top jeux";
+        $content['title'] = "Top jeux à jouer régulièrement en solo";
 
         return [
             'title' => 'Top jeux',

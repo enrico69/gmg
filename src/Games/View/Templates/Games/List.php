@@ -13,7 +13,8 @@ $games = $content['games'];
     foreach ($games as $game) {
         /** @var \Games\Model\Game $game */
         echo '<p>' . htmlentities($game->getName()) .
-            ' -  <a href="' . $siteURL . 'detail?id=' .
+            ' (' . htmlentities($game->getPlatform()) .
+            ') -  <a href="' . $siteURL . 'detail?id=' .
             $game->getId() . '">Detail</a></p>';
     }
     ?>

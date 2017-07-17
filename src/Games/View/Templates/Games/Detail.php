@@ -19,7 +19,7 @@ $extra = array_key_exists('extra', $content) ? $content['extra'] : '';
         <?php echo $game->isToPlaySolo() ? 'Oui' : 'Non'; ?></p>
     <p><strong>A jouer en multi:</strong>
         <?php echo $game->isToPlayMulti() ? 'Oui' : 'Non'; ?></p>
-    <p><strong>Est une copie:</strong>
+    <p><strong>Au moins un exemplaire est une copie:</strong>
         <?php echo $game->isCopy() ? 'Oui' : 'Non'; ?></p>
     <p><strong>En plusieurs exemplaires:</strong>
         <?php echo $game->isMany() ? 'Oui' : 'Non'; ?></p>
