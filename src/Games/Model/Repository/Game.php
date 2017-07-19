@@ -41,7 +41,7 @@ class Game extends AbstractRepository
         $result = null;
 
         if ($gameCount > 0) {
-            $random = random_int(1, $gameCount);
+            $random = rand(1, $gameCount);
             $result = $this->getById($random);
         }
 
