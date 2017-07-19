@@ -12,7 +12,7 @@ $extra = array_key_exists('extra', $content) ? $content['extra'] : '';
     <h1 class="title text-center"><?php echo htmlentities(
             $game->getName()
         ); ?></h1>
-    <p><a href="<?php echo $urlSite; ?>edit?id=<?php echo $game->getId(); ?>">Editer</a></p>
+    <p><a href="<?php echo $siteURL; ?>edit?id=<?php echo $game->getId(); ?>">Editer</a></p>
     <p><strong>Support:</strong> <?php
         echo htmlentities($game->getPlatform()); ?></p>
     <p><strong>A jouer en solo:</strong>
