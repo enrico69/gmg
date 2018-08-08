@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class DefaultController
+ * Class DetailController
  * @package AppBundle\Controller
  */
-class DefaultController extends Controller
+class DetailController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/details/{id}", name="game_detail")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -26,8 +26,23 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         return $this->render(
-            'view/home.twig',
-            ['screenTitle' => 'Bienvenue sur Games!']
+            'view/detail.twig',
+            ['screenTitle' => 'Détail du jeu ']
+        );
+    }
+
+    /**
+     * @Route("/random/{filter}", defaults={"filter" = "none"}, name="random_game")
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function randomAction(Request $request)
+    {
+        return $this->render(
+            'view/detail.twig',
+            ['screenTitle' => 'Détail du jeu ']
         );
     }
 }

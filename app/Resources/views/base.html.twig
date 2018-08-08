@@ -2,12 +2,21 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}{{ screenTitle }}{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/vendor/bootstrap-theme.css') }}" rel="stylesheet" />
+            <link href="{{ asset('css/vendor/bootstrap.min.css') }}" rel="stylesheet" />
+            <link href="{{ asset('css/games.css') }}" rel="stylesheet" />
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="{{ asset('js/vendor/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/vendor/require-2.3.5.js') }}"></script>
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {{ include('general/header.html.twig') }}
+        <div id="content">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>

@@ -11,23 +11,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class DefaultController
+ * Class AddController
  * @package AppBundle\Controller
  */
-class DefaultController extends Controller
+class AddController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/add", name="add_game")
      */
     public function indexAction(Request $request)
     {
-        return $this->render(
-            'view/home.twig',
-            ['screenTitle' => 'Bienvenue sur Games!']
-        );
+        // replace this example code with whatever you need
+        return $this->render('base.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
     }
 }

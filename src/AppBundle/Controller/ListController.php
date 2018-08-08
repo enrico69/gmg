@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class DefaultController
+ * Class ListController
  * @package AppBundle\Controller
  */
-class DefaultController extends Controller
+class ListController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/list/{filter}", defaults={"filter" = "none"}, name="games_list")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -26,8 +26,8 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         return $this->render(
-            'view/home.twig',
-            ['screenTitle' => 'Bienvenue sur Games!']
+            'view/detail.twig', // To change according to the request
+            ['screenTitle' => 'Détail du jeu '] // To change according to the request
         );
     }
 }
