@@ -17,15 +17,15 @@
                     <a class="nav-li" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">Au hasard <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="random" >Un jeu au hasard</a></li>
-                        <li><a href="random?mode=solo" >Un jeu à jouer solo au hasard</a></li>
-                        <li><a href="random?mode=multi" >Un jeu à jouer en multi au hasard</a></li>
+                        <li><a href="{{ url('random_game') }}" >Un jeu au hasard</a></li>
+                        <li><a href="{{ url('random_game', {'filter': 'solo'}) }}" >Un jeu à jouer solo au hasard</a></li>
+                        <li><a href="{{ url('random_game', {'filter': 'multi'}) }}" >Un jeu à jouer en multi au hasard</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-li" href="{{ url('games_list') }}" >Listes</a></li>
-                <li><a class="nav-li" href="list?filter=top">Top jeux solo récurrents</a></li>
-                <li><a class="nav-li" href="list?filter=to-buy" >A acheter</a></li>
-                <li><a class="nav-li" href="list?filter=todo" >Jeux à faire</a></li>
+                <li><a class="nav-li" href="{{ url('games_supports') }}" >Par support</a></li>
+                <li><a class="nav-li" href="{{ url('games_list', {'filter': 'top'}) }}">Top jeux solo récurrents</a></li>
+                <li><a class="nav-li" href="{{ url('games_list', {'filter': 'to-buy'}) }}">A acheter</a></li>
+                <li><a class="nav-li" href="{{ url('games_list', {'filter': 'todo'}) }}">Jeux à faire</a></li>
                 <li><a class="nav-li" href="add" >Ajout</a></li>
             </ul>
         </div>

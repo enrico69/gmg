@@ -17,17 +17,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListController extends Controller
 {
     /**
+     * Authorized filters
+     */
+    const FILTERS = [
+        'top'    => 'Top jeux à jouer régulièrement en solo',
+        'todo'   => 'Jeux à faire',
+        'to-buy' => 'Jeux à acheter',
+    ];
+
+    /**
      * @Route("/list/{filter}", defaults={"filter" = "none"}, name="games_list")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param string                                    $filter
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, string $filter)
     {
+        if (!array_key_exists($filter, self::FILTERS)) {
+            throw $this->createNotFoundException();
+        }
+
         return $this->render(
-            'view/detail.twig', // To change according to the request
-            ['screenTitle' => 'Détail du jeu '] // To change according to the request
+            'view/list.twig',
+            ['screenTitle' => self::FILTERS[$filter] . ' ']
         );
     }
 }
