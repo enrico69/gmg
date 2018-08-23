@@ -4,4 +4,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>{{ screenTitle }}</h1>
+    <span id="tempMsg">Veuillez patienter...</span>
+
+    <script type="text/javascript">
+        var targetUrl = "{{ url('games_global_count') }}";
+        require(['pages/home']);
+    </script>
 {% endblock %}
