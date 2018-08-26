@@ -86,6 +86,13 @@ class Games
     protected $toDo = '0';
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="material", type="boolean", nullable=false)
+     */
+    protected $material = '0';
+
+    /**
      * @return int
      */
     public function getId()
@@ -244,5 +251,28 @@ class Games
     {
         $this->toDo = $toDo;
     }
-}
 
+    /**
+     * @return bool
+     */
+    public function isMaterial()
+    {
+        return $this->material;
+    }
+
+    /**
+     * @param bool $material
+     */
+    public function setMaterial(bool $material)
+    {
+        $this->material = $material;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return get_object_vars($this);
+    }
+}

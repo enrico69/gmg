@@ -41,7 +41,6 @@ class CountController extends Controller
             $games['toBuyCount']         = $gamesRepo->getGamesToBuyCount();
             $games['hardwareToBuyCount'] = $gamesRepo->getHardwareToBuyCount();
         } catch (\Exception $ex) {
-            $games['count'] = 0;
             $games['msg']   = 'An error occurred';
             $this->get('logger')->err(
                 $ex->getMessage()

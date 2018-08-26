@@ -9,6 +9,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class DetailController
@@ -54,9 +55,42 @@ class DetailController extends Controller
             throw $this->createNotFoundException();
         }
 
-        return $this->render(
-            'view/detail.twig',
-            ['screenTitle' => self::RANDOM_FILTERS[$filter]]
-        );
+        $isJson = $request->get('json', false);
+
+        if ($isJson) {
+            $result = new JsonResponse($this->getRandomGame($filter));
+        } else {
+            $result =  $this->render(
+                'view/detail.twig',
+                [
+                    'screenTitle' => self::RANDOM_FILTERS[$filter],
+                    'filter'      => $filter,
+                ]
+            );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string $filter
+     *
+     * @return array
+     */
+    protected function getRandomGame(string $filter)
+    {
+        $theGame = ['msg' => ''];
+        try {
+            $gamesRepo       = $this->getDoctrine()->getRepository('AppBundle:Games');
+            $theGame['game'] = $gamesRepo->getRandomGame($filter)->toArray();
+        } catch (\Exception $ex) {
+            $theGame['msg'] = 'An error occurred';
+            $this->get('logger')->err(
+                $ex->getMessage()
+                . $ex->getTraceAsString()
+            );
+        }
+
+        return $theGame;
     }
 }

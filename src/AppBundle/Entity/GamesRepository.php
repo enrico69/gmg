@@ -7,6 +7,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 
 /**
  * Class GamesRepository
@@ -24,7 +25,7 @@ class GamesRepository extends EntityRepository
      */
     public function getAllRealOwnedGamesCount()
     {
-        $query = 'SELECT COUNT(*) FROM games WHERE owned = 1';
+        $query = "SELECT COUNT(*) FROM games WHERE platform != 'A acheter'";
 
         $result = $this->getEntityManager()
             ->getConnection()
@@ -70,5 +71,41 @@ class GamesRepository extends EntityRepository
             ->fetch();
 
         return $result['COUNT(*)'];
+    }
+
+    /**
+     * Return a random game (not hardware, not to buy)
+     *
+     * @param string $filter
+     *
+     * @return \AppBundle\Entity\Games
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\NoResultException
+     */
+    public function getRandomGame(string $filter = '')
+    {
+        $query = 'SELECT id FROM games'
+            . " WHERE platform != 'A acheter'"
+            . ' AND material != 1';
+
+        if ($filter === 'solo') {
+            $query .= ' AND to_play_solo = 1';
+        } elseif ($filter === 'multi') {
+            $query .= ' AND to_play_multi = 1';
+        }
+
+        $query .= ' ORDER BY RAND() LIMIT 1';
+
+        $result = $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($query)
+            ->fetch();
+
+        if (!$result) {
+            throw new NoResultException();
+        }
+
+        return $this->find($result['id']);
     }
 }

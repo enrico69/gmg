@@ -3,6 +3,12 @@ h1 {
 }
 
 #content {
-    width: 80%;
-    margin: auto;
+}
+
+#contentExample {
+    display: none;
+}
+
+#anotherGame {
+    display: none;
 }

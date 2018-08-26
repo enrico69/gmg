@@ -3,5 +3,26 @@
 #}
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>{{ screenTitle }}</h1>
+    <h1 id="mainTitle">{{ screenTitle }}</h1>
+    <span id="tempMsg">Veuillez patienter...</span>
+
+    <div id="contentExample">
+            <p><strong>Support:</strong> @SUPPORT@</p>
+            <p><strong>A jouer en solo:</strong> @IS_SOLO@</p>
+            <p><strong>A jouer en multi:</strong> @IS_MULTI@</p>
+            <p><strong>A faire en priorité:</strong> @IS_PRIO@</p>
+            <p><strong>Au moins un exemplaire est une copie:</strong> @IS_ONE_COPY@</p>
+            <p><strong>En plusieurs exemplaires:</strong> @IS_MANY@</p>
+            <p><strong>Top jeu:</strong> @IS_TOP@</p>
+            <p><strong>Commentaires:</strong></p> @COMMENTS@</p>
+    </div>
+
+    <div id="gameContent"></div>
+    <button id="anotherGame">Un autre jeu au hasard</button>
+
+    <script type="text/javascript">
+        var targetUrl = "{{ url('random_game') }}";
+        var filter    = "{{ filter }}";
+        require(['pages/detail']);
+    </script>
 {% endblock %}
