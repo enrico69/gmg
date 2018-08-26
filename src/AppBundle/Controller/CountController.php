@@ -36,11 +36,13 @@ class CountController extends Controller
     {
         $games['msg'] = '';
         try {
-            $gamesRepo      = $this->getDoctrine()->getRepository('AppBundle:Games');
-            $games['count'] = count($count = $gamesRepo->findAll());
+            $gamesRepo                   = $this->getDoctrine()->getRepository('AppBundle:Games');
+            $games['ownedCount']         = $gamesRepo->getAllRealOwnedGamesCount();
+            $games['toBuyCount']         = $gamesRepo->getGamesToBuyCount();
+            $games['hardwareToBuyCount'] = $gamesRepo->getHardwareToBuyCount();
         } catch (\Exception $ex) {
-            $games['msg'] = 0;
-            $games['msg'] = 'An error occurred';
+            $games['count'] = 0;
+            $games['msg']   = 'An error occurred';
             $this->get('logger')->err(
                 $ex->getMessage()
                 . $ex->getTraceAsString()

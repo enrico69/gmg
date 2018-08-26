@@ -35,9 +35,18 @@ define(
              */
             this.displayData = function (data) {
                 if (data.msg === "") {
+                    $('#content').append("Bonjour.");
+                    $('#content').append("<ul>");
                     $('#content').append(
-                        "Bonjour, il y a actuellement " + data.count + " jeux enregistrés dans l'application."
+                        "<li>Il y a actuellement " + data.ownedCount + " jeux possédés enregistrés dans l'application.</li>"
                     );
+                    $('#content').append(
+                        "<li>Il y a actuellement " + data.toBuyCount + " jeux à acheter enregistrés dans l'application.</li>"
+                    );
+                    $('#content').append(
+                        "<li>Il y a actuellement " + data.hardwareToBuyCount + " éléments de matériel à acheter enregistrés dans l'application.</li>"
+                    );
+                    $('#content').append("</ul>");
                 } else {
                     $("#content").append(data.msg);
                 }
