@@ -19,14 +19,14 @@ define(
              * Contact the server to extract data
              */
             this.getData = function () {
-                var queryFilter = filter === "" ? "" : "?filter=" + filter;
+
                 $.ajax({
                     type: "GET",
-                    url: targetUrl + queryFilter + "&json=true",
+                    url: targetUrl,
                     success: function (data, textStatus, jqXHR) {
                         self.showTempMsg(false);
                         self.displayData(data);
-                        self.showAnotherGameButton(true);
+                        self.showAnotherGameButton(showAnotherButton);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         self.showTempMsg(false);

@@ -21,8 +21,12 @@
     <button id="anotherGame">Un autre jeu au hasard</button>
 
     <script type="text/javascript">
-        var targetUrl = "{{ url('random_game') }}";
-        var filter    = "{{ filter }}";
+        var targetUrl = "{{ url }}?json=true";
+        var showAnotherButton = true;
+        {% if showRandomButton is defined %}
+            showAnotherButton = "{{ showRandomButton }}";
+        {% endif %}
+
         require(['pages/detail']);
     </script>
 {% endblock %}

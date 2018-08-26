@@ -23,22 +23,35 @@ class DetailController extends Controller
     const RANDOM_FILTERS = [
         'none'  => "Détail d'un jeu au hasard",
         'solo'  => "Détail d'un jeu solo au hasard",
-        'multi' => "Détail d'un jeu au hasard",
+        'multi' => "Détail d'un jeu multi au hasard",
     ];
 
     /**
      * @Route("/details/{id}", name="game_detail")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int                                       $id
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, int $id)
     {
-        return $this->render(
-            'view/detail.twig',
-            ['screenTitle' => 'Détail du jeu ']
-        );
+        $isJson = $request->get('json', false);
+
+        if ($isJson) {
+            $result = new JsonResponse($this->getSpecificGame($id));
+        } else {
+            $result = $this->render(
+                'view/detail.twig',
+                [
+                    'url'              => $request->getRequestUri(),
+                    'screenTitle'      => "Détail d'un jeu",
+                    'showRandomButton' => false,
+                ]
+            );
+        }
+
+        return $result;
     }
 
     /**
@@ -63,8 +76,8 @@ class DetailController extends Controller
             $result =  $this->render(
                 'view/detail.twig',
                 [
+                    'url'         => $request->getRequestUri(),
                     'screenTitle' => self::RANDOM_FILTERS[$filter],
-                    'filter'      => $filter,
                 ]
             );
         }
@@ -83,6 +96,28 @@ class DetailController extends Controller
         try {
             $gamesRepo       = $this->getDoctrine()->getRepository('AppBundle:Games');
             $theGame['game'] = $gamesRepo->getRandomGame($filter)->toArray();
+        } catch (\Exception $ex) {
+            $theGame['msg'] = 'An error occurred';
+            $this->get('logger')->err(
+                $ex->getMessage()
+                . $ex->getTraceAsString()
+            );
+        }
+
+        return $theGame;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return array
+     */
+    protected function getSpecificGame(int $id)
+    {
+        $theGame = ['msg' => ''];
+        try {
+            $gamesRepo       = $this->getDoctrine()->getRepository('AppBundle:Games');
+            $theGame['game'] = $gamesRepo->find($id)->toArray();
         } catch (\Exception $ex) {
             $theGame['msg'] = 'An error occurred';
             $this->get('logger')->err(
