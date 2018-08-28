@@ -22,12 +22,19 @@ class SupportController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function indexAction(Request $request)
     {
+        $gamesRepo = $this->getDoctrine()->getRepository('AppBundle:Games');
+
         return $this->render(
             'view/supports.twig',
-            ['screenTitle' => 'Par support']
+            [
+                'screenTitle' => 'Par support',
+                'supports'    => $gamesRepo->getSupportList(),
+            ]
         );
     }
 }

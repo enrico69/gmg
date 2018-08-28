@@ -4,4 +4,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>{{ screenTitle }}</h1>
+    <ul>
+        {% for support in supports %}
+            <li>{{ support.platform }} ({{ support.total }}) - <a href="{{ url('games_list_by_support') }}?support={{ support.platform }}">Voir la liste</a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

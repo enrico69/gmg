@@ -108,4 +108,48 @@ class GamesRepository extends EntityRepository
 
         return $this->find($result['id']);
     }
+
+    /**
+     * Return the list of all different platforms.
+     *
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getSupportList()
+    {
+        $query = "SELECT platform, count(*) as total FROM games "
+            . " WHERE platform != 'A acheter' GROUP BY platform";
+
+        $result = $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($query)
+            ->fetchAll();
+
+        return $result;
+    }
+
+    /**
+     * Return the list of games for a given platform
+     *
+     * @param string $platform
+     *
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getByPlatform(string $platform)
+    {
+        $query = "SELECT id, name FROM games"
+            . " WHERE platform = :requestedPlatform";
+
+        $params = ['requestedPlatform' =>  $platform];
+
+        $result = $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($query, $params)
+            ->fetchAll();
+
+        return $result;
+    }
 }

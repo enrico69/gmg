@@ -3,5 +3,19 @@
 #}
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>{{ screenTitle }}</h1>
+    <h1 id="mainTitle">{{ screenTitle }}</h1>
+    <span id="tempMsg">Veuillez patienter...</span>
+
+    <div id="contentExample">
+        <li>@GAME_NAME@ <a href="@GAME_URL@">Détails</a></li>
+    </div>
+
+    <div id="listContent"><ul id="gameList"></ul></div>
+
+    <script type="text/javascript">
+        var targetUrl = "{{ url('games_list_by_support') }}";
+        var gameDetailUrl = "{{ url('homepage') }}details/";
+        var support = "{{ support }}";
+        require(['pages/list']);
+    </script>
 {% endblock %}

@@ -9,6 +9,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class ListController
@@ -43,5 +44,40 @@ class ListController extends Controller
             'view/list.twig',
             ['screenTitle' => self::FILTERS[$filter] . ' ']
         );
+    }
+
+    /**
+     * @Route("/list-by-support", name="games_list_by_support")
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function listBySupportAction(Request $request)
+    {
+        $isAjax  = $request->get('ajax', false);
+        $support = $request->get('support', false);
+        if (!$support) {
+            throw $this->createNotFoundException();
+        }
+
+        if ($isAjax) {
+            $result = new JsonResponse(
+                $this->getDoctrine()
+                    ->getRepository('AppBundle:Games')
+                    ->getByPlatform($support)
+            );
+        } else {
+            $result = $this->render(
+                'view/list.twig',
+                [
+                    'screenTitle' => "Jeux sur le support '$support'",
+                    'support'     => $support,
+                ]
+            );
+        }
+
+        return $result;
     }
 }
