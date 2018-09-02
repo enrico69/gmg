@@ -29,6 +29,18 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    app.listener.disable_registered_user:
+            class: AppBundle\Observer\DisableRegisteredUserListener
+            arguments:
+                - "@templating"
+            tags:
+                # split to multiple line for readability
+                # can be made into a single line like - { name: ..., event: ... , method: ... }
+                -
+                    name: "kernel.event_listener"
+                    event: "fos_user.registration.initialize"
+                    method: "disableUser"
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
