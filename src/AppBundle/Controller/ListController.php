@@ -58,9 +58,11 @@ class ListController extends Controller
     {
         $isAjax  = $request->get('ajax', false);
         $support = $request->get('support', false);
+
         if (!$support) {
             throw $this->createNotFoundException();
         }
+        $this->verifySupport($support);
 
         if ($isAjax) {
             $result = new JsonResponse(
@@ -73,11 +75,39 @@ class ListController extends Controller
                 'view/list.twig',
                 [
                     'screenTitle' => "Jeux sur le support '$support'",
-                    'support'     => $support,
+                    'targetUrl'   => $this->container
+                            ->get('router')
+                            ->generate('games_list_by_support')
+                                . "?ajax=true&support=$support",
                 ]
             );
         }
 
         return $result;
+    }
+
+    /**
+     * @param string $support
+     * @return void
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    protected function verifySupport(string $support)
+    {
+        $supportList = $this->getDoctrine()
+            ->getRepository('AppBundle:Games')
+            ->getSupportList();
+
+        $met = false;
+        foreach ($supportList as $supportEntry) {
+            if ($supportEntry['platform'] === $support) {
+                $met = true;
+                break;
+            }
+        }
+
+        if (!$met) {
+            throw $this->createNotFoundException();
+        }
     }
 }

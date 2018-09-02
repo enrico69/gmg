@@ -22,7 +22,7 @@ define(
 
                 $.ajax({
                     type: "GET",
-                    url: targetUrl + "?ajax=true&support=" + support,
+                    url: targetUrl,
                     success: function (data, textStatus, jqXHR) {
                         self.showTempMsg(false);
                         self.displayData(data);
@@ -42,7 +42,7 @@ define(
                 var gameListNode = $("#gameList");
                 var contentExample = $('#contentExample').html();
 
-                $("#mainTitle").append(" (" + data.length + " jeux)");
+                $("#mainTitle").append(" (" + data.length + " entrées)");
 
                 $.each(data, function (index, value) {
                     var gameInfo = contentExample;

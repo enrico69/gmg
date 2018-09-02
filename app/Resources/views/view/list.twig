@@ -13,9 +13,8 @@
     <div id="listContent"><ul id="gameList"></ul></div>
 
     <script type="text/javascript">
-        var targetUrl = "{{ url('games_list_by_support') }}";
+        var targetUrl = "{{ targetUrl|raw }}";
         var gameDetailUrl = "{{ url('homepage') }}details/";
-        var support = "{{ support }}";
         require(['pages/list']);
     </script>
 {% endblock %}
