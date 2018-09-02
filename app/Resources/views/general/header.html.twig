@@ -26,7 +26,9 @@
                 <li><a class="nav-li" href="{{ url('games_list', {'filter': 'top'}) }}">Top jeux solo récurrents</a></li>
                 <li><a class="nav-li" href="{{ url('games_list', {'filter': 'to-buy'}) }}">A acheter</a></li>
                 <li><a class="nav-li" href="{{ url('games_list', {'filter': 'todo'}) }}">Jeux à faire</a></li>
-                <li><a class="nav-li" href="add" >Ajout</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a class="nav-li" href="{{ url('add_game') }}" >Ajout</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
