@@ -122,8 +122,8 @@ class GamesRepository extends EntityRepository
     {
         $exclusion = $excludeToBuy === true ? "WHERE platform != 'A acheter'":'';
 
-        $query = "SELECT platform, count(*) as total FROM games "
-            . " $exclusion GROUP BY platform";
+        $query = 'SELECT platform, count(*) as total FROM games '
+            . " $exclusion GROUP BY platform ORDER BY platform ASC";
 
         $result = $this->getEntityManager()
             ->getConnection()
@@ -144,14 +144,54 @@ class GamesRepository extends EntityRepository
      */
     public function getByPlatform(string $platform)
     {
-        $query = "SELECT id, name FROM games"
-            . " WHERE platform = :requestedPlatform";
+        $query = 'SELECT id, name FROM games'
+            . ' WHERE platform = :requestedPlatform ORDER BY name';
 
         $params = ['requestedPlatform' =>  $platform];
 
         $result = $this->getEntityManager()
             ->getConnection()
             ->executeQuery($query, $params)
+            ->fetchAll();
+
+        return $result;
+    }
+
+    /**
+     * Return the list of games for which are solo recurring
+     *
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getSoloRecurring()
+    {
+        $query = 'SELECT id, name FROM games'
+            . ' WHERE top_game = 1 ORDER BY name';
+
+        $result = $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($query)
+            ->fetchAll();
+
+        return $result;
+    }
+
+    /**
+     * Return the list of games to do
+     *
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getTodo()
+    {
+        $query = 'SELECT id, name FROM games'
+            . ' WHERE to_do = 1 ORDER BY name';
+
+        $result = $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($query)
             ->fetchAll();
 
         return $result;

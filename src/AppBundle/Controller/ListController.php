@@ -23,7 +23,7 @@ class ListController extends Controller
     const FILTERS = [
         'top'    => 'Top jeux à jouer régulièrement en solo',
         'todo'   => 'Jeux à faire',
-        'to-buy' => 'Jeux à acheter',
+        'to-buy' => 'Jeux et matériels à acheter',
     ];
 
     /**
@@ -50,6 +50,38 @@ class ListController extends Controller
                 'screenTitle' => self::FILTERS[$filter] . ' ',
                 'targetUrl'   => $targetUrl,
             ]
+        );
+    }
+
+    /**
+     * @Route("/list-solo-recurring", name="list-solo-recurring")
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getSoloRecurringAction()
+    {
+        return new JsonResponse(
+            $this->getDoctrine()
+                ->getRepository('AppBundle:Games')
+                ->getSoloRecurring()
+        );
+    }
+
+    /**
+     * @Route("/list-todo", name="list-todo")
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getTodoAction()
+    {
+        return new JsonResponse(
+            $this->getDoctrine()
+                ->getRepository('AppBundle:Games')
+                ->getTodo()
         );
     }
 
@@ -139,6 +171,18 @@ class ListController extends Controller
                         ->get('router')
                         ->generate('games_list_by_support')
                     . '?ajax=true&support=' . urlencode('A acheter');
+                break;
+
+            case 'top':
+                $targetUrl = $this->container
+                        ->get('router')
+                        ->generate('list-solo-recurring');
+                break;
+
+            case 'todo':
+                $targetUrl = $this->container
+                    ->get('router')
+                    ->generate('list-todo');
                 break;
 
             default:
