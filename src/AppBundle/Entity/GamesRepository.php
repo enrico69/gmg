@@ -112,14 +112,18 @@ class GamesRepository extends EntityRepository
     /**
      * Return the list of all different platforms.
      *
+     * @param bool $excludeToBuy
+     *
      * @return array
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getSupportList()
+    public function getSupportList($excludeToBuy = true)
     {
+        $exclusion = $excludeToBuy === true ? "WHERE platform != 'A acheter'":'';
+
         $query = "SELECT platform, count(*) as total FROM games "
-            . " WHERE platform != 'A acheter' GROUP BY platform";
+            . " $exclusion GROUP BY platform";
 
         $result = $this->getEntityManager()
             ->getConnection()

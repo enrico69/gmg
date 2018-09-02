@@ -33,6 +33,8 @@ class ListController extends Controller
      * @param string                                    $filter
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function indexAction(Request $request, string $filter)
     {
@@ -40,9 +42,14 @@ class ListController extends Controller
             throw $this->createNotFoundException();
         }
 
+        $targetUrl = $this->getIndexTargetUrl($filter);
+
         return $this->render(
             'view/list.twig',
-            ['screenTitle' => self::FILTERS[$filter] . ' ']
+            [
+                'screenTitle' => self::FILTERS[$filter] . ' ',
+                'targetUrl'   => $targetUrl,
+            ]
         );
     }
 
@@ -52,7 +59,9 @@ class ListController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Doctrine\DBAL\DBALException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function listBySupportAction(Request $request)
     {
@@ -62,7 +71,8 @@ class ListController extends Controller
         if (!$support) {
             throw $this->createNotFoundException();
         }
-        $this->verifySupport($support);
+        $excludeToBuy = $support === 'A acheter' ? false:true;
+        $this->verifySupport($support, $excludeToBuy);
 
         if ($isAjax) {
             $result = new JsonResponse(
@@ -88,15 +98,18 @@ class ListController extends Controller
 
     /**
      * @param string $support
+     * @param bool   $excludeToBuy
+     *
      * @return void
      *
      * @throws \Doctrine\DBAL\DBALException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    protected function verifySupport(string $support)
+    protected function verifySupport(string $support, bool $excludeToBuy)
     {
         $supportList = $this->getDoctrine()
             ->getRepository('AppBundle:Games')
-            ->getSupportList();
+            ->getSupportList($excludeToBuy);
 
         $met = false;
         foreach ($supportList as $supportEntry) {
@@ -109,5 +122,29 @@ class ListController extends Controller
         if (!$met) {
             throw $this->createNotFoundException();
         }
+    }
+
+    /**
+     * @param string $filter
+     *
+     * @return string
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    protected function getIndexTargetUrl(string $filter)
+    {
+        switch ($filter) {
+            case 'to-buy':
+                $targetUrl = $this->container
+                        ->get('router')
+                        ->generate('games_list_by_support')
+                    . '?ajax=true&support=' . urlencode('A acheter');
+                break;
+
+            default:
+                throw $this->createNotFoundException();
+        }
+
+        return $targetUrl;
     }
 }
