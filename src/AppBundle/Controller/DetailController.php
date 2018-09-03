@@ -1,8 +1,6 @@
 <?php
 /**
- * @author     Eric COURTIAL <ecourtial@absolunet.com>
- * @copyright  Copyright (c) 2018 Absolunet (http://www.absolunet.com)
- * @link       http://www.absolunet.com
+ * @author     Eric COURTIAL <e.courtial30@gmail.com>
  */
 namespace AppBundle\Controller;
 
