@@ -74,7 +74,7 @@ class Games
     /**
      * @var string
      *
-     * @ORM\Column(name="comments", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="comments", type="text", length=65535, nullable=true)
      */
     protected $comments;
 

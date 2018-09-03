@@ -42,7 +42,7 @@ class ManageController extends Controller
             $em->persist($game);
             $em->flush();
 
-            $response = $this->redirectToRoute('games_supports');
+            $response = $this->redirectToRoute('game_detail', ['id' => $game->getId()]);
         } else {
             $response = $this->getFormView($form, $game, 'Ajouter une entrée');
         }
@@ -68,8 +68,10 @@ class ManageController extends Controller
             throw $this->createNotFoundException();
         }
 
+        $editionRoute = $this->generateUrl('edit_game') . "?id=$gameId";
+
         $form = $this->createForm(GameForm::class, $game, [
-            'action' => $this->generateUrl('edit_game') . "?id=$gameId",
+            'action' => $editionRoute,
             'method' => 'POST',
         ]);
 
@@ -79,7 +81,7 @@ class ManageController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            $response = $this->redirectToRoute('games_supports');
+            $response = $this->redirect($editionRoute);
         } else {
             $response = $this->getFormView($form, $game, 'Editer une entrée');
         }
