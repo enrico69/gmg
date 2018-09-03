@@ -50,7 +50,13 @@ define(
                 contentExample = contentExample.replace("@IS_ONE_COPY@", self.boolToYesNoConverter(data.game.copy));
                 contentExample = contentExample.replace("@IS_MANY@", self.boolToYesNoConverter(data.game.many));
                 contentExample = contentExample.replace("@IS_TOP@", self.boolToYesNoConverter(data.game.topGame));
-                contentExample = contentExample.replace("@COMMENTS@", this.nl2br(data.game.comments));
+
+                if (data.game.comments) {
+                    contentExample = contentExample.replace("@COMMENTS@", this.nl2br(data.game.comments));
+                } else {
+                    contentExample = contentExample.replace("@COMMENTS@", "");
+                }
+
                 contentExample = contentExample.replace("@GAME-ID@", data.game.id);
 
                 $("#gameContent").empty().html(contentExample);
