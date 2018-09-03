@@ -48,6 +48,7 @@ define(
                     var gameInfo = contentExample;
                     gameInfo = gameInfo.replace("@GAME_NAME@", value.name);
                     gameInfo = gameInfo.replace("@GAME_URL@", gameDetailUrl + value.id);
+                    gameInfo = gameInfo.replace("@GAME-ID@", value.id);
                     gameListNode.append(gameInfo);
                 });
             };

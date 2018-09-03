@@ -51,43 +51,36 @@ class Games extends AbstractType
                 'label' => 'A jouer en solo',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
-                'choices_as_values' => true,
             ])
             ->add('to_play_multi', ChoiceType::class, [
                 'label' => 'A jouer en multi',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
-                'choices_as_values' => true,
             ])
             ->add('copy', ChoiceType::class, [
                 'label' => 'Pas un jeu original',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
-                'choices_as_values' => true,
             ])
             ->add('many', ChoiceType::class, [
                 'label' => 'Plusieurs exemplaires',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
-                'choices_as_values' => true,
             ])
             ->add('top_game', ChoiceType::class, [
                 'label' => 'Top jeu',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
-                'choices_as_values' => true,
             ])
             ->add('to_do', ChoiceType::class, [
                 'label' => 'A faire',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
-                'choices_as_values' => true,
             ])
             ->add('material', ChoiceType::class, [
                 'label' => "N'est pas un jeu (matériel)",
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
-                'choices_as_values' => true,
             ])
             ->add(
                 'comments',
