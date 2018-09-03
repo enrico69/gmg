@@ -32,8 +32,8 @@
             </ul>
         </div>
     </div>
-    <form style="float:right;" method="POST" action="search">
-        <input type="text" name="search" />
+    <form style="float:right;" method="POST" action="{{ url('game_search') }}">
+        <input type="text" name="keyword" />
         <input type="submit" value="Rechercher"/>
     </form>
 </nav>

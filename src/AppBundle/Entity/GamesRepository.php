@@ -196,4 +196,26 @@ class GamesRepository extends EntityRepository
 
         return $result;
     }
+
+    /**
+     * Return the list of games by keyword in title
+     *
+     * @param string $keyword
+     *
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getSearchByName(string $keyword)
+    {
+        $query = 'SELECT id, name FROM games'
+            . " WHERE name LIKE :keyword ORDER BY name";
+
+        $result = $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($query, ['keyword' => "%$keyword%"])
+            ->fetchAll();
+
+        return $result;
+    }
 }
