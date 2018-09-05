@@ -93,6 +93,27 @@ class Games
     protected $material = '0';
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="all_of_fame", type="boolean", nullable=true, options={"default" : 0})
+     */
+    protected $allOfFame = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="all_of_fame_year", type="integer", nullable=true)
+     */
+    protected $allOfFameYear = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="all_of_fame_position", type="integer", nullable=true)
+     */
+    protected $allOfFamePosition = '0';
+
+    /**
      * @return int
      */
     public function getId()
@@ -266,6 +287,54 @@ class Games
     public function setMaterial(bool $material)
     {
         $this->material = $material;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAllOfFame()
+    {
+        return $this->allOfFame;
+    }
+
+    /**
+     * @param bool $allOfFame
+     */
+    public function setAllOfFame($allOfFame)
+    {
+        $this->allOfFame = $allOfFame;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAllOfFameYear()
+    {
+        return $this->allOfFameYear;
+    }
+
+    /**
+     * @param int $allOfFameYear
+     */
+    public function setAllOfFameYear($allOfFameYear)
+    {
+        $this->allOfFameYear = $allOfFameYear;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAllOfFamePosition()
+    {
+        return $this->allOfFamePosition;
+    }
+
+    /**
+     * @param int $allOfFamePosition
+     */
+    public function setAllOfFamePosition($allOfFamePosition)
+    {
+        $this->allOfFamePosition = $allOfFamePosition;
     }
 
     /**

@@ -218,4 +218,23 @@ class GamesRepository extends EntityRepository
 
         return $result;
     }
+
+    /**
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function extractAllOfFame()
+    {
+        $query = 'SELECT id, name, all_of_fame_year FROM games'
+            . ' WHERE all_of_fame = 1'
+            . ' ORDER BY all_of_fame_year, all_of_fame_position';
+
+        $result = $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($query)
+            ->fetchAll();
+
+        return $result;
+    }
 }

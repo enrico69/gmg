@@ -51,12 +51,20 @@ define(
                 contentExample = contentExample.replace("@IS_MANY@", self.boolToYesNoConverter(data.game.many));
                 contentExample = contentExample.replace("@IS_TOP@", self.boolToYesNoConverter(data.game.topGame));
 
-                if (data.game.comments) {
-                    contentExample = contentExample.replace("@COMMENTS@", this.nl2br(data.game.comments));
-                } else {
-                    contentExample = contentExample.replace("@COMMENTS@", "");
+                var allFameYear = "N/A";
+                var allFamePosition = "N/A";
+                if (data.game.allOfFame) {
+                    allFameYear = data.game.allOfFameYear;
+                    allFamePosition = data.game.allOfFamePosition;
                 }
+                contentExample = contentExample.replace("@HALL_YEAR@", allFameYear);
+                contentExample = contentExample.replace("@HALL_POSITION@", allFamePosition);
 
+                var gameComments = "";
+                if (data.game.comments) {
+                    gameComments = this.nl2br(data.game.comments);
+                }
+                contentExample = contentExample.replace("@COMMENTS@", gameComments);
                 contentExample = contentExample.replace("@GAME-ID@", data.game.id);
 
                 $("#gameContent").empty().html(contentExample);

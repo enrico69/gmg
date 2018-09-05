@@ -82,11 +82,32 @@ class Games extends AbstractType
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
             ])
+            ->add('all_of_fame', ChoiceType::class, [
+                'label' => 'All of fame?',
+                'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
+                'multiple'  => false,
+            ])
+            ->add(
+                'all_of_fame_year',
+                TextType::class,
+                [
+                    'required' => 'false',
+                    'label'    => 'Le cas échéant, en quelle année?',
+                ]
+            )
+            ->add(
+                'all_of_fame_position',
+                TextType::class,
+                [
+                    'required' => 'false',
+                    'label'    => 'Et en quelle position?',
+                ]
+            )
             ->add(
                 'comments',
                 TextareaType::class,
                 [
-                    'required' => 'true',
+                    'required' => 'false',
                     'label'    => 'Commentaires',
                 ]
             )
