@@ -226,7 +226,7 @@ class GamesRepository extends EntityRepository
      */
     public function extractAllOfFame()
     {
-        $query = 'SELECT id, name, all_of_fame_year FROM games'
+        $query = 'SELECT id, name, platform, all_of_fame_year FROM games'
             . ' WHERE all_of_fame = 1'
             . ' ORDER BY all_of_fame_year, all_of_fame_position';
 

@@ -50,6 +50,7 @@ define(
                 contentExample = contentExample.replace("@IS_ONE_COPY@", self.boolToYesNoConverter(data.game.copy));
                 contentExample = contentExample.replace("@IS_MANY@", self.boolToYesNoConverter(data.game.many));
                 contentExample = contentExample.replace("@IS_TOP@", self.boolToYesNoConverter(data.game.topGame));
+                contentExample = contentExample.replace("@IS_PLAYED_OFTEN@", self.boolToYesNoConverter(data.game.played_it_often));
 
                 var allFameYear = "N/A";
                 var allFamePosition = "N/A";
@@ -68,6 +69,7 @@ define(
                 contentExample = contentExample.replace("@GAME-ID@", data.game.id);
 
                 $("#gameContent").empty().html(contentExample);
+                $("#hallOfFameCriteria").show();
             };
 
             /**

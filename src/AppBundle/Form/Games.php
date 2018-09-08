@@ -72,6 +72,11 @@ class Games extends AbstractType
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
             ])
+            ->add('usedToPlayItOften', ChoiceType::class, [
+                'label' => "J'y ai beaucoup joué",
+                'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
+                'multiple'  => false,
+            ])
             ->add('to_do', ChoiceType::class, [
                 'label' => 'A faire',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
@@ -91,15 +96,16 @@ class Games extends AbstractType
                 'all_of_fame_year',
                 TextType::class,
                 [
-                    'required' => 'false',
-                    'label'    => 'Le cas échéant, en quelle année?',
+                    'required' => false,
+                    'label'    => "Le cas échéant, en quelle année? (année ou "
+                        . "j'y ai joué pour la première fois, pas l'année de sa sortie officielle",
                 ]
             )
             ->add(
                 'all_of_fame_position',
                 TextType::class,
                 [
-                    'required' => 'false',
+                    'required' => false,
                     'label'    => 'Et en quelle position?',
                 ]
             )
@@ -107,7 +113,7 @@ class Games extends AbstractType
                 'comments',
                 TextareaType::class,
                 [
-                    'required' => 'false',
+                    'required' => false,
                     'label'    => 'Commentaires',
                 ]
             )

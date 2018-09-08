@@ -12,3 +12,8 @@ h1 {
 #anotherGame {
     display: none;
 }
+
+#hallOfFameCriteria {
+    display: none;
+    margin-top: 50px;
+}

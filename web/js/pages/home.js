@@ -39,9 +39,9 @@ define(
 
                     content += "Bonjour.";
                     content += "<ul>";
-                    content += "<li>Il y a actuellement " + data.ownedCount + " jeux possédés enregistrés dans l'application.</li>";
-                    content += "<li>Il y a actuellement " + data.toBuyCount + " jeux à acheter enregistrés dans l'application.</li>";
-                    content += "<li>Il y a actuellement " + data.hardwareToBuyCount + " éléments de matériel à acheter enregistrés dans l'application.</li>";
+                    content += "<li>Il y a actuellement <strong>" + data.ownedCount + "</strong> jeux possédés enregistrés dans l'application.</li>";
+                    content += "<li>Il y a actuellement <strong>" + data.toBuyCount + "</strong> jeux à acheter enregistrés dans l'application.</li>";
+                    content += "<li>Il y a actuellement <strong>" + data.hardwareToBuyCount + "</strong> éléments de matériel à acheter enregistrés dans l'application.</li>";
                     content += "</ul>";
                     $("#content").append(content);
                     self.displayHallOfFame(data);
@@ -60,7 +60,7 @@ define(
                 }
 
                 var content = "";
-                content += "<br>Il y a plusieurs jeux dans le Hall of Fames..."
+                content += "<br>Il y a <strong>" + data.allOfFameGames.length + "</strong> jeux dans le Hall of Fames (année où ils ont été 'découverts', pas année de leur sortie) ..."
                 content += "<br>";
                 content += "<ul>";
                 var previousYear = 0;
@@ -77,14 +77,17 @@ define(
                         content += "<li>" + value.all_of_fame_year + ": ";
                         liOpened = true;
                     }
-                    content +=value.name + ", ";
+                    content += "<i>" + value.name + "</i> (" + value.platform + "), ";
                 });
                 if (liOpened) {
                     content = content.substr(0, content.length - 2);
                     content += "</li>";
                 }
                 content += "</ul>";
+                var allOfFameCriteria = $("#hallOfFameCriteria").remove();
                 $("#content").append(content);
+                $("#content").append(allOfFameCriteria);
+                $("#hallOfFameCriteria").show();
             };
 
             /**

@@ -6,6 +6,8 @@
     <h1>{{ screenTitle }}</h1>
     <span id="tempMsg">Veuillez patienter...</span>
 
+    {{ include('view/hallOfGameCriteria.html.twig') }}
+
     <script type="text/javascript">
         var targetUrl = "{{ url('games_home_data') }}";
         require(['pages/home']);

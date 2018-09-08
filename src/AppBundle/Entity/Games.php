@@ -102,16 +102,23 @@ class Games
     /**
      * @var integer
      *
-     * @ORM\Column(name="all_of_fame_year", type="integer", nullable=true)
+     * @ORM\Column(name="all_of_fame_year", type="integer", nullable=true, options={"default" : 0})
      */
     protected $allOfFameYear = '0';
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="all_of_fame_position", type="integer", nullable=true)
+     * @ORM\Column(name="all_of_fame_position", type="integer", nullable=true, options={"default" : 0})
      */
     protected $allOfFamePosition = '0';
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="played_it_often", type="boolean", nullable=true, options={"default" : 0})
+     */
+    protected $usedToPlayItOften = '0';
 
     /**
      * @return int
@@ -335,6 +342,22 @@ class Games
     public function setAllOfFamePosition($allOfFamePosition)
     {
         $this->allOfFamePosition = $allOfFamePosition;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUsedToPlayItOften()
+    {
+        return $this->usedToPlayItOften;
+    }
+
+    /**
+     * @param bool $usedToPlayItOften
+     */
+    public function setUsedToPlayItOften($usedToPlayItOften)
+    {
+        $this->usedToPlayItOften = $usedToPlayItOften;
     }
 
     /**
