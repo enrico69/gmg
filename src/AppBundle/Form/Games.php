@@ -68,7 +68,7 @@ class Games extends AbstractType
                 'multiple'  => false,
             ])
             ->add('top_game', ChoiceType::class, [
-                'label' => 'Top jeu',
+                'label' => "Top jeu (toujours valable aujourd'hui)",
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
             ])
