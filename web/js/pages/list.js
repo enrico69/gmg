@@ -58,13 +58,13 @@ define(
                 var iconString = "";
 
                 if (game.all_of_fame == 1) {
-                    iconString += '<img src="' + imageUrl + 'hall-of-fame.png"/>';
+                    iconString += '<img title="Hall of fame" src="' + imageUrl + 'hall-of-fame.png"/>';
                 }
                 if (game.top_game == 1) {
-                    iconString += '<img src="' + imageUrl + 'top.png"/>';
+                    iconString += '<img title="Top jeu" src="' + imageUrl + 'top.png"/>';
                 }
                 if (game.played_it_often == 1) {
-                    iconString += '<img src="' + imageUrl + 'time.png"/>';
+                    iconString += '<img title="Beaucoup joué" src="' + imageUrl + 'time.png"/>';
                 }
 
                 console.log(iconString);

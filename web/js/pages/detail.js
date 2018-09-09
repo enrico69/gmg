@@ -70,6 +70,10 @@ define(
 
                 $("#gameContent").empty().html(contentExample);
                 $("#hallOfFameCriteria").show();
+                var deleteButton = $("#deleteGameForm");
+                if (deleteButton) {
+                    deleteButton.show();
+                }
             };
 
             /**

@@ -90,6 +90,37 @@ class ManageController extends Controller
     }
 
     /**
+     * @Route("/delete", name="delete_game")
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction(Request $request)
+    {
+        $csrfToken = $request->request->get('_csrf_token', '');
+        if (!$this->isCsrfTokenValid('deleteForm', $csrfToken)) {
+            throw $this->createNotFoundException();
+        }
+
+        $gameId = (int) $request->request->get('gameId');
+
+        if ($gameId !== 0) {
+            $game = $this->getDoctrine()->getRepository('AppBundle:Games')->find($gameId);
+            $em   = $this->getDoctrine()->getManager();
+            $em->remove($game);
+            $em->flush();
+            $response = $this->redirect($this->generateUrl('homepage'));
+        } else {
+            throw $this->createNotFoundException();
+        }
+
+        return $response;
+    }
+
+    /**
      * @param \Symfony\Component\Form\Form $form
      * @param \AppBundle\Entity\Games      $game
      * @param string                       $title

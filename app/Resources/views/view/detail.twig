@@ -24,6 +24,24 @@
     {{ include('view/hallOfGameCriteria.html.twig') }}
     <button id="anotherGame">Un autre jeu au hasard</button>
 
+    {% if is_granted('ROLE_ADMIN') and showDeleteForm is defined and showDeleteForm == true %}
+        <script type="text/javascript">
+            function areYouSure() {
+                var status = false;
+                if (confirm("Etes-vous sûr de vouloir supprimer cet article?") == true) {
+                    status = true;
+                }
+
+                return status;
+            }
+        </script>
+        <form method="POST" id="deleteGameForm" action="{{ url('delete_game') }}" onsubmit="return areYouSure();">
+            <input type="hidden" name="gameId" value="{{ gameId }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('deleteForm') }}">
+            <input type="submit" value="Supprimer">
+        </form>
+    {% endif %}
+
     <script type="text/javascript">
         var targetUrl = "{{ url }}?json=true";
         var showAnotherButton = true;

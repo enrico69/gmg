@@ -45,6 +45,8 @@ class DetailController extends Controller
                     'url'              => $request->getRequestUri(),
                     'screenTitle'      => "Détail d'un jeu",
                     'showRandomButton' => false,
+                    'showDeleteForm'   => true,
+                    'gameId'           => $id,
                 ]
             );
         }

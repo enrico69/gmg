@@ -17,3 +17,8 @@ h1 {
     display: none;
     margin-top: 50px;
 }
+
+#deleteGameForm {
+    display: none;
+    margin-top: 50px;
+}
