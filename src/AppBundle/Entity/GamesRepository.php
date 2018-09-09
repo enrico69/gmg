@@ -144,7 +144,7 @@ class GamesRepository extends EntityRepository
      */
     public function getByPlatform(string $platform)
     {
-        $query = 'SELECT id, name FROM games'
+        $query = 'SELECT id, name,top_game , all_of_fame, played_it_often FROM games'
             . ' WHERE platform = :requestedPlatform ORDER BY name';
 
         $params = ['requestedPlatform' =>  $platform];

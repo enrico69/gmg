@@ -49,8 +49,27 @@ define(
                     gameInfo = gameInfo.replace("@GAME_NAME@", value.name);
                     gameInfo = gameInfo.replace("@GAME_URL@", gameDetailUrl + value.id);
                     gameInfo = gameInfo.replace("@GAME-ID@", value.id);
+                    gameInfo = gameInfo.replace("@GAME_ICON@", self.getIcons(value));
                     gameListNode.append(gameInfo);
                 });
+            };
+
+            this.getIcons = function (game) {
+                var iconString = "";
+
+                if (game.all_of_fame == 1) {
+                    iconString += '<img src="' + imageUrl + 'hall-of-fame.png"/>';
+                }
+                if (game.top_game == 1) {
+                    iconString += '<img src="' + imageUrl + 'top.png"/>';
+                }
+                if (game.played_it_often == 1) {
+                    iconString += '<img src="' + imageUrl + 'time.png"/>';
+                }
+
+                console.log(iconString);
+
+                return iconString;
             };
 
             /**

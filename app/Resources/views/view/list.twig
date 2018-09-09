@@ -7,7 +7,7 @@
     <span id="tempMsg">Veuillez patienter...</span>
 
     <div id="contentExample">
-        <li>@GAME_NAME@ <a href="@GAME_URL@">Détails</a> - <a href="{{ url('edit_game') }}?id=@GAME-ID@">Editer</a></li>
+        <li>@GAME_NAME@ @GAME_ICON@ <a href="@GAME_URL@">Détails</a> - <a href="{{ url('edit_game') }}?id=@GAME-ID@">Editer</a></li>
     </div>
 
     <div id="listContent"><ul id="gameList"></ul></div>
@@ -15,6 +15,7 @@
     <script type="text/javascript">
         var targetUrl = "{{ targetUrl|raw }}";
         var gameDetailUrl = "{{ url('homepage') }}details/";
+        var imageUrl = "{{ asset('images') }}/";
         require(['pages/list']);
     </script>
 {% endblock %}
