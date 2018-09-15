@@ -45,8 +45,9 @@ CREATE TABLE `games` (
   `all_of_fame_year` int(11) DEFAULT '0',
   `all_of_fame_position` int(11) DEFAULT '0',
   `played_it_often` tinyint(1) DEFAULT '0',
+  `todo_recurring` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2018-09-09 14:54:06
+-- 2018-09-15 15:01:36

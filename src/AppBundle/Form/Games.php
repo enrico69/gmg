@@ -48,12 +48,12 @@ class Games extends AbstractType
                 ]
             )
             ->add('to_play_solo', ChoiceType::class, [
-                'label' => 'A jouer en solo',
+                'label' => 'A (re)jouer en solo',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
             ])
             ->add('to_play_multi', ChoiceType::class, [
-                'label' => 'A jouer en multi',
+                'label' => 'A (re)jouer en multi',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
             ])
@@ -78,7 +78,7 @@ class Games extends AbstractType
                 'multiple'  => false,
             ])
             ->add('to_do', ChoiceType::class, [
-                'label' => 'A faire',
+                'label' => 'A faire (jamais joué ou fini)',
                 'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
                 'multiple'  => false,
             ])
@@ -109,6 +109,11 @@ class Games extends AbstractType
                     'label'    => 'Et en quelle position?',
                 ]
             )
+            ->add('todo_recurring', ChoiceType::class, [
+                'label' => 'A jouer solo régulièrement?',
+                'choices' => array_flip([0 => 'Non', 1 => 'Oui']),
+                'multiple'  => false,
+            ])
             ->add(
                 'comments',
                 TextareaType::class,

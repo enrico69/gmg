@@ -51,6 +51,7 @@ define(
                 contentExample = contentExample.replace("@IS_MANY@", self.boolToYesNoConverter(data.game.many));
                 contentExample = contentExample.replace("@IS_TOP@", self.boolToYesNoConverter(data.game.topGame));
                 contentExample = contentExample.replace("@IS_PLAYED_OFTEN@", self.boolToYesNoConverter(data.game.played_it_often));
+                contentExample = contentExample.replace("@RECURING_SOLO@", self.boolToYesNoConverter(data.game.todo_recurring));
 
                 var allFameYear = "N/A";
                 var allFamePosition = "N/A";

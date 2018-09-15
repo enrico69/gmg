@@ -167,7 +167,7 @@ class GamesRepository extends EntityRepository
     public function getSoloRecurring()
     {
         $query = 'SELECT id, name FROM games'
-            . ' WHERE top_game = 1 ORDER BY name';
+            . ' WHERE todo_recurring = 1 ORDER BY name';
 
         $result = $this->getEntityManager()
             ->getConnection()

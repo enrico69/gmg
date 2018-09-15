@@ -121,6 +121,13 @@ class Games
     protected $usedToPlayItOften = '0';
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="todo_recurring", type="boolean", nullable=true, options={"default" : 0})
+     */
+    protected $todoRecurring = '0';
+
+    /**
      * @return int
      */
     public function getId()
@@ -358,6 +365,22 @@ class Games
     public function setUsedToPlayItOften($usedToPlayItOften)
     {
         $this->usedToPlayItOften = $usedToPlayItOften;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTodoRecurring()
+    {
+        return $this->todoRecurring;
+    }
+
+    /**
+     * @param bool $todoRecurring
+     */
+    public function setTodoRecurring($todoRecurring)
+    {
+        $this->todoRecurring = $todoRecurring;
     }
 
     /**
